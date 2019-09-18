@@ -185,22 +185,15 @@ namespace DV8.Html.Support
                 .ToList();
         }
 
-        private static readonly string[] Firsts =
-        {
-//            nameof(ProcDef.Id), nameof(ProcDef.Name), nameof(ProcDef.Status)
-        };
+        public static readonly List<string> Firsts = new List<string>();
 
-        private static readonly string[] Lasts =
-        {
-//            nameof(ProcDef.CreatedDate), nameof(ProcDef.CreatedBy),
-//            nameof(ProcDef.LastUpdatedDate), nameof(ProcDef.LastUpdatedBy)
-        };
+        public static readonly List<string> Lasts = new List<string>(); 
 
         public static int Weight(string propname)
         {
-            if (Firsts.Contains(propname)) return Array.IndexOf(Firsts, propname);
-            else if (Lasts.Contains(propname)) return 1000 + Array.IndexOf(Lasts, propname);
-            else return 50;
+            if (Firsts.Contains(propname)) return Array.IndexOf(Firsts.ToArray(), propname);
+            if (Lasts.Contains(propname)) return 1000 + Array.IndexOf(Lasts.ToArray(), propname);
+            return 50;
         }
 
         public static string GetItemType(Type t)
