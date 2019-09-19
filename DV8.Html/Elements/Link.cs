@@ -1,6 +1,6 @@
 ﻿namespace DV8.Html.Elements
 {
-    public class Link
+    public class Link: HtmlElement
     {
         [Attr]
         public string Rel { get; set; }
