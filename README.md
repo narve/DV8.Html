@@ -1,11 +1,12 @@
 
-http://github.com/narve/DV8.Html: HTML Elements and Html Serializer
+https://github.com/narve/DV8.Html: HTML Elements and Html Serializer
 
 This project is a dead simple and dependency free package to work with HTML elements from C# code. 
 
-In addition, there is support for serializing objects and graphs of objects to HTML. Lots of elements 
-and attributes are implemented, and you can generate missing elements/attributes at run time by specifying element 
-names.  
+In addition, there is support for serializing objects and graphs of objects to HTML. 
+
+Lots of elements and attributes are implemented, and you can generate missing elements/attributes at 
+run time by specifying element/attribute names.  
 
 Example code for generating HTML.  
 
