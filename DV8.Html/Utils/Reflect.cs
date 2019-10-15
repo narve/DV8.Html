@@ -159,6 +159,16 @@ namespace DV8.Html.Utils
                 type.GetGenericTypeDefinition() == typeof(Nullable<>);
         }
 
+        public static bool IsNonPrimitive(object o)
+        {
+            if (o == null) return false;
+            var type = o.GetType();
+            if (type.IsPrimitive || type.IsNumeric()) return false;
+            if (type == typeof(string)) return false;
+            if (type == typeof(DateTime)) return false;
+            return true;
+        }        
+        
         [SuppressMessage("ReSharper", "TailRecursiveCall")]
         public static bool IsNumeric(this Type type)
         {

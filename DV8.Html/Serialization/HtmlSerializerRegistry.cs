@@ -1,18 +1,19 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DV8.Html.Elements;
+using DV8.Html.Support;
+using static DV8.Html.Utils.Reflect;
 
 namespace DV8.Html.Serialization
 {
     public class HtmlSerializerRegistry : IHtmlSerializer
     {
-        public List<IHtmlSerializer> Serializers = new List<IHtmlSerializer>();
+        public readonly List<IHtmlSerializer> Serializers = new List<IHtmlSerializer>();
 
-        public bool CanSerialize(object o)
-        {
-            return Serializers.Any(ser => ser.CanSerialize(o));
-        }
+        public bool CanSerialize(object o) => 
+            Serializers.Any(ser => ser.CanSerialize(o));
 
         public IEnumerable<IHtmlElement> Serialize(object o, int lvl, IHtmlSerializer fac = null)
         {
@@ -27,10 +28,7 @@ namespace DV8.Html.Serialization
 
         }
 
-        public IHtmlSerializer FindSerializer(object o)
-        {
-            return Serializers.FirstOrDefault(ser => ser.CanSerialize(o));
-        }
+        public IHtmlSerializer FindSerializer(object o) => Serializers.FirstOrDefault(ser => ser.CanSerialize(o));
 
 
         public HtmlSerializerRegistry Add(IHtmlSerializer ser)
@@ -40,14 +38,28 @@ namespace DV8.Html.Serialization
         }
 
         public HtmlSerializerRegistry Add(Func<object, bool> predicate,
-            Func<object, int, IHtmlSerializer, IEnumerable<IHtmlElement>> serializer)
-        {
-            return Add(new FuncHtmlSerializer(predicate, serializer));
-        }
+            Func<object, int, IHtmlSerializer, IEnumerable<IHtmlElement>> serializer) =>
+            Add(new FuncHtmlSerializer(predicate, serializer));
 
-        public HtmlSerializerRegistry Add(Func<object, bool> predicate, Func<object, IEnumerable<IHtmlElement>> serializer)
+        public HtmlSerializerRegistry Add(Func<object, bool> predicate, Func<object, IEnumerable<IHtmlElement>> serializer) => Add(new FuncHtmlSerializer(predicate, serializer));
+        
+        public static HtmlSerializerRegistry AddDefaults(HtmlSerializerRegistry ser)
         {
-            return Add(new FuncHtmlSerializer(predicate, serializer));
+            if (!HtmlSupport.Lasts.Contains("Links"))
+            {
+                HtmlSupport.Lasts.Add("Links");
+            }
+
+            if (!HtmlSupport.Firsts.Contains("Id"))
+            {
+                HtmlSupport.Firsts.Add("Id");
+            }
+
+            ser.Add(o => o is IHtmlElement, o => (o as IHtmlElement).ToArray());
+            ser.Add(o => !IsNonPrimitive(o), o => new Span(o.ToString()).ToArray());
+            ser.Add(o => o is IEnumerable, o => new ListSerializer().Serialize(o, 3, ser));
+            ser.Add(IsNonPrimitive, o => new PropsSerializer{IncludeType = true}.Serialize(o, 3, ser));
+            return ser;
         }
     }
 }
