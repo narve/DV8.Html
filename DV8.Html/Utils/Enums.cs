@@ -7,8 +7,8 @@ namespace DV8.Html.Utils
     {
         public static T ParseEnum<T>(string s)
         {
-            Type t = typeof(T);
-            T[] values = (T[]) Enum.GetValues(t);
+            var t = typeof(T);
+            var values = (T[]) Enum.GetValues(t);
             if (values == null)
             {
                 throw new ArgumentException($"Ikke en enum-type: {t}");

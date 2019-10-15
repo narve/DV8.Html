@@ -36,14 +36,14 @@ namespace DV8.Html.Serialization
                 //                Type elementType = GetItemType(o);
                 if (o is IEnumerable)
                     o = (o as IEnumerable).ToRawList();
-                Type elementType = o.GetType().GetGenericArguments().Length == 1
+                var elementType = o.GetType().GetGenericArguments().Length == 1
                     ? o.GetType().GetGenericArguments()[0]
                     : o.GetType().GetElementType();
 
                 if (elementType == null)
                     throw new ArgumentException($"Unable to find elementtype for {o.GetType()}");
 
-                string itemType = HtmlSupport.GetItemType(elementType);
+                var itemType = HtmlSupport.GetItemType(elementType);
                 return new Ul
                 {
                     Clz = "result-list " + itemType,

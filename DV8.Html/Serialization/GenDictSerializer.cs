@@ -17,7 +17,7 @@ namespace DV8.Html.Serialization
             public IEnumerable<IHtmlElement> Serialize(object x, int lvl, IHtmlSerializer fac)
             {
                 var d = (IDictionary<string, object>) x;
-                string itemtype = HtmlSupport.Itemtype(x);
+                var itemtype = HtmlSupport.Itemtype(x);
                 var subs = d.Keys.ToRawList().Cast<string>()
                     .Select(name => new {Name = name, Val = d[name]})
 //                    .Where(a => a.Val != null)

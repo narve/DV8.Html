@@ -12,8 +12,8 @@ namespace DV8.Html.Utils
         public static IEnumerable<TSource> DistinctBy<TSource, TKey>
             (this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
         {
-            HashSet<TKey> seenKeys = new HashSet<TKey>();
-            foreach (TSource element in source)
+            var seenKeys = new HashSet<TKey>();
+            foreach (var element in source)
             {
                 if (seenKeys.Add(keySelector(element)))
                 {
@@ -24,27 +24,27 @@ namespace DV8.Html.Utils
 
         public static T SingleOr<T>(this IEnumerable<T> source, T orElse)
         {
-            T t = source.FirstOrDefault();
+            var t = source.FirstOrDefault();
             return t == null ? orElse : t;
         }
 
         public static T SingleOr<T>(this IEnumerable<T> source, Func<T> orElse)
         {
-            T t = source.FirstOrDefault();
+            var t = source.FirstOrDefault();
             return t == null ? orElse() : t;
         }
 
         [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
         public static IEnumerable<T> ForEach<T>(this IEnumerable<T> source, Action<T> action)
         {
-            foreach (T element in source)
+            foreach (var element in source)
                 action(element);
             return source;
         }
 
         public static IEnumerable<T> With<T>(this IEnumerable<T> source, T toAdd)
         {
-            List<T> list = source.ToList();
+            var list = source.ToList();
             list.Add(toAdd);
             return list;
         }

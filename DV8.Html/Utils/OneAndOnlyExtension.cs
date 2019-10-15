@@ -9,10 +9,10 @@ namespace DV8.Html.Utils
             string msgTemplate = "Found {0} elements in a list of {1} with size {0} - expected exactly ONE. {2}", string prefix = "")
         {
             var list = enumerable.ToList();
-            int count = list.Count;
+            var count = list.Count;
             if (count != 1)
             {
-                string elems = string.Join("; ", list.Take(5).ToArray());
+                var elems = string.Join("; ", list.Take(5).ToArray());
                                 throw new System.Exception(string.Format(prefix + msgTemplate, count, typeof(T).Name, elems));
 //                string msgSuffix = $"Found {count} elements in a list of {typeof(T).Name} - expected exactly ONE. {elems}"; 
 //                throw new System.Exception(msgTemplate??"" + msgSuffix);

@@ -72,7 +72,7 @@ namespace DV8.Html.Support
 
         private static string TypeName(Type theType)
         {
-            string tname = theType.Name;
+            var tname = theType.Name;
             if (tname.Contains('`')) tname = tname.Substring(0, tname.IndexOf('`'));
             return tname;
         }

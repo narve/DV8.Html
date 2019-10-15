@@ -68,8 +68,8 @@ namespace DV8.Html.Elements
             foreach (var pi in DefinedAttributes().Where(AttributeHasValue))
             {
                 var val = pi.GetValue(this);
-                Attr a = (Attr) pi.GetCustomAttribute(typeof(Attr));
-                string attrName = a.name ?? pi.Name.ToLower();
+                var a = (Attr) pi.GetCustomAttribute(typeof(Attr));
+                var attrName = a.name ?? pi.Name.ToLower();
 
                 WriteAttribute(writer, attrName, val);
             }

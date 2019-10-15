@@ -21,7 +21,7 @@ namespace DV8.Html.Serialization
 //                dict = (IDictionary) x;
 //                dict = (IDictionary<string, object>) x;
                 var d = (IDictionary) x;
-                string itemtype = HtmlSupport.Itemtype(x);
+                var itemtype = HtmlSupport.Itemtype(x);
                 var subs = d.Keys.ToRawList().Cast<string>()
                     .Select(name => new {Name = name, Val = d[name]})
 //                    .Where(a => a.Val != null)

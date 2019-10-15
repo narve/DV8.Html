@@ -7,27 +7,22 @@ using DV8.Html.Utils;
 
 namespace DV8.Html.Serialization
 {
-
         public class PropsSerializer : IHtmlSerializer
         {
-            public bool CanSerialize(object x)
-            {
-                return true;
-            }
+            public bool IncludeType { get; set; } = false;
+            
+            public bool CanSerialize(object x) => true;
 
-            public IEnumerable<IHtmlElement> Serialize(object x, int lvl, IHtmlSerializer fac)
-            {
-                return SerializeProps(x, lvl, fac, HtmlSupport.PropsOf(x.GetType()));
-            }
+            public IEnumerable<IHtmlElement> Serialize(object x, int lvl, IHtmlSerializer fac) => 
+                SerializeProps(x, lvl, fac, HtmlSupport.PropsOf(x.GetType()), IncludeType);
 
-            public static string PropName(string pn)
-            {
-                return pn.LowercaseFirst();
-            }
+            public static string PropName(string pn) => 
+                pn.LowercaseFirst();
 
-            public static IEnumerable<IHtmlElement> SerializeProps(object x, int lvl, IHtmlSerializer fac, List<MemberInfo> props)
+            public static IEnumerable<IHtmlElement> SerializeProps(object x, int lvl, IHtmlSerializer fac, IEnumerable<MemberInfo> props, bool includeType)
             {
-                string itemtype = HtmlSupport.Itemtype(x);
+                var itemType = HtmlSupport.Itemtype(x);
+                
                 var subs = props
                     .Select(mi => new {mi.Name, Val = HtmlSupport.TryGetVal(mi, x)})
                     .Where(a => a.Val != null)
@@ -36,12 +31,25 @@ namespace DV8.Html.Serialization
                         new Dt(a.Name),
                         new Dd {Itemprop = PropName(a.Name), Subs = fac.Serialize(a.Val, lvl - 1, fac).ToArray()}
                     })
-                    .ToArray();
+                    .ToList();
+
+                if (includeType)
+                {
+                    subs.ToList().InsertRange(0, new IHtmlElement[]
+                    {
+                        new Dt("Type"),
+                        new Dd
+                        {
+                            Title = itemType,
+                            Text = x.GetType().Name, 
+                        }, 
+                    });
+                }
                 return new Ul
                 {
-                    Subs = subs,
+                    Subs = subs.ToArray(),
                     Itemscope = true,
-                    Itemtype = itemtype,
+                    Itemtype = itemType,
                 }.ToArray();
             }
         }

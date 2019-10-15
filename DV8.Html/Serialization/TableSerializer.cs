@@ -56,7 +56,7 @@ namespace DV8.Html.Serialization
 
         public Td SerializeToTd(MemberInfo prop, object item)
         {
-            object val = HtmlSupport.TryGetVal(prop, item);
+            var val = HtmlSupport.TryGetVal(prop, item);
             if (val is List<Linking>)
             {
                 val = (val as List<Linking>).OfType<A>().ToList();
