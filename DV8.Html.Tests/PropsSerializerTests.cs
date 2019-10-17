@@ -1,5 +1,4 @@
 using System.Linq;
-using DV8.Html.Elements;
 using DV8.Html.Serialization;
 using NUnit.Framework;
 using static NUnit.Framework.Assert;
