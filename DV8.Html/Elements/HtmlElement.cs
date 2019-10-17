@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+// ReSharper disable CollectionNeverUpdated.Global
 
 // ReSharper disable ArrangeRedundantParentheses
 
@@ -31,13 +32,13 @@ namespace DV8.Html.Elements
         [Attr]
         public string Itemprop { get; set; }
 
-        public string Tag;
+        public string Tag { get; }
 
 //        public string Content { get; set; }
 
         public string Text { get; set; }
 
-        public IDictionary<string, string> ExAttributes = new Dictionary<string, string>();
+        public readonly IDictionary<string, string> ExAttributes = new Dictionary<string, string>();
 
 
 
@@ -70,13 +71,12 @@ namespace DV8.Html.Elements
                 var val = pi.GetValue(this);
                 var a = (Attr) pi.GetCustomAttribute(typeof(Attr));
                 var attrName = a.name ?? pi.Name.ToLower();
-
                 WriteAttribute(writer, attrName, val);
             }
 
-            foreach (var kvp in ExAttributes)
+            foreach (var (key, value) in ExAttributes)
             {
-                WriteAttribute(writer, kvp.Key, kvp.Value);
+                WriteAttribute(writer, key, value);
             }
 
             writer.WriteLine(">");

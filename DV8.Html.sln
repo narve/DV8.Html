@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DV8.Html", "DV8.Html\DV8.Html.csproj", "{07895FD8-89EB-4753-BBBA-6C8B303E48E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DV8.Html.Tests", "DV8.Html.Tests\DV8.Html.Tests.csproj", "{51FA0DAC-C112-408E-AC23-B425EFD9AA6A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{07895FD8-89EB-4753-BBBA-6C8B303E48E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07895FD8-89EB-4753-BBBA-6C8B303E48E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07895FD8-89EB-4753-BBBA-6C8B303E48E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51FA0DAC-C112-408E-AC23-B425EFD9AA6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51FA0DAC-C112-408E-AC23-B425EFD9AA6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51FA0DAC-C112-408E-AC23-B425EFD9AA6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51FA0DAC-C112-408E-AC23-B425EFD9AA6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

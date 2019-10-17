@@ -48,7 +48,7 @@ namespace DV8.Html.Serialization
                 })
                 .ToList().ForEach(e => subs.Add(e));
 
-            return new Ul
+            return new Dl
             {
                 Subs = subs.ToArray(),
                 Itemscope = true,

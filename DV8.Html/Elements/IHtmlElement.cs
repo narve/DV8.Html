@@ -16,6 +16,8 @@
         string ToHtml();
         IHtmlElement[] Subs { get; set; }
 
+        string Tag { get; }
+
         string Title { get; set; }
     }
 }
