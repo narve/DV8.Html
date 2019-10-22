@@ -42,6 +42,8 @@ namespace DV8.Html.Serialization
             Add(new FuncHtmlSerializer(predicate, serializer));
 
         public HtmlSerializerRegistry Add(Func<object, bool> predicate, Func<object, IEnumerable<IHtmlElement>> serializer) => Add(new FuncHtmlSerializer(predicate, serializer));
+
+        public static HtmlSerializerRegistry GetDefault() => AddDefaults(new HtmlSerializerRegistry());
         
         public static HtmlSerializerRegistry AddDefaults(HtmlSerializerRegistry ser)
         {
