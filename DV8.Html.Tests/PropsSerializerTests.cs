@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using DV8.Html.Serialization;
 using NUnit.Framework;
@@ -43,6 +44,19 @@ namespace DV8.Html.Tests
             AreEqual("ul", elements[0].Tag);
             AreEqual("li", elements[0].Subs[0].Tag);
             AreEqual("dl", elements[0].Subs[0].Subs[0].Tag);
+        }
+
+        [Test]
+        public void Serialize_DateTime()
+        {
+            var ser = HtmlSerializerRegistry.AddDefaults(new HtmlSerializerRegistry()); 
+            
+            var toSer = new SamplePoco
+            {
+                DateProp = DateTime.Now,
+            };
+
+            var elements = ser.Serialize(toSer, 3); 
         }
     }
 }

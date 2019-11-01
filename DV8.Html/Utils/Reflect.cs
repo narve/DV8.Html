@@ -166,6 +166,7 @@ namespace DV8.Html.Utils
             if (type.IsPrimitive || type.IsNumeric()) return false;
             if (type == typeof(string)) return false;
             if (type == typeof(DateTime)) return false;
+            if (type == typeof(DateTimeOffset)) return false;
             return true;
         }        
         

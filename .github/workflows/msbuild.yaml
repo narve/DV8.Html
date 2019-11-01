@@ -2,6 +2,8 @@ name: Dotnet core build
 # This workflow is triggered on pushes to the repository.
 on: [push]
 
+# Consider: printf '%(%Y-%m-%dT%H:%M)T\n' -1
+
 jobs:
   build:
     runs-on: ubuntu-latest
