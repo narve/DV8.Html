@@ -20,5 +20,5 @@ jobs:
       - name: Build NuGet Package
         run: dotnet pack --configuration Release -o NuGetPackages
       - name: Deploy NuGet Package
-        run: dotnet nuget push DV8.Html/NuGetPackages/*.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
+        run: dotnet nuget push NuGetPackages/*.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
         
