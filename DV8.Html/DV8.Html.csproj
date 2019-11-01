@@ -11,4 +11,40 @@
       <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_UnmanagedRegistrationCache Remove="obj\DV8.Html.csproj.UnmanagedRegistration.cache" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ResolveComReferenceCache Remove="obj\Debug\netcoreapp3.0\DV8.Html.csproj.ResolveComReference.cache" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <IntermediateAssembly Remove="obj\Debug\netcoreapp3.0\DV8.Html.dll" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_DebugSymbolsIntermediatePath Remove="obj\Debug\netcoreapp3.0\DV8.Html.pdb" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_DeploymentManifestEntryPoint Remove="obj\Debug\netcoreapp3.0\DV8.Html.dll" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ApplicationManifest Remove="obj\Debug\netcoreapp3.0\Native.DV8.Html.manifest" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <DeployManifest Remove="obj\Debug\netcoreapp3.0\DV8.Html.application" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ClsidMap Remove="obj\Debug\netcoreapp3.0\DV8.Html.clsidmap" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <RegFreeComManifest Remove="obj\Debug\netcoreapp3.0\DV8.Html.X.manifest" />
+    </ItemGroup>
+
 </Project>

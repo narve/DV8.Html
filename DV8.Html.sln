@@ -4,8 +4,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DV8.Html", "DV8.Html\DV8.Ht
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DV8.Html.Tests", "DV8.Html.Tests\DV8.Html.Tests.csproj", "{51FA0DAC-C112-408E-AC23-B425EFD9AA6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DV8.Html.Experimental", "DV8.Html.Experimental\DV8.Html.Experimental.csproj", "{190F3753-BE01-4162-B685-2A1FE4CADCA8}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
