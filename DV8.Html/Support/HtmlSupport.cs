@@ -70,12 +70,12 @@ namespace DV8.Html.Support
 //            }
 //        }
 
-        private static string TypeName(Type theType)
-        {
-            var tname = theType.Name;
-            if (tname.Contains('`')) tname = tname.Substring(0, tname.IndexOf('`'));
-            return tname;
-        }
+//        private static string TypeName(Type theType)
+//        {
+//            var tname = theType.Name;
+//            if (tname.Contains('`')) tname = tname.Substring(0, tname.IndexOf('`'));
+//            return tname;
+//        }
 
         //        public static IEnumerable<A> GetLinksFromContextOrCreateAndCache(object po)
         //        {
@@ -203,7 +203,7 @@ namespace DV8.Html.Support
 
         public static string Itemtype(object x)
         {
-            return "http://ne.no/" + x.GetType().GenericFqn();
+            return "http://dv8.no/" + x.GetType().GenericFqn();
         }
 
         public static object TryGetVal(MemberInfo pi, object x)

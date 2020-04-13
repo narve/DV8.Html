@@ -34,8 +34,6 @@ namespace DV8.Html.Elements
 
         public string Tag { get; }
 
-//        public string Content { get; set; }
-
         public string Text { get; set; }
 
         public readonly IDictionary<string, string> ExAttributes = new Dictionary<string, string>();

@@ -1,13 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.0</TargetFramework>
 
         <IsPackable>false</IsPackable>
 
-        <LangVersion>7.3</LangVersion>
+        <LangVersion>8</LangVersion>
 
         <OutputType>Library</OutputType>
+
+        <TargetFrameworks>netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
+
+        <PackageVersion>1.0.7</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
