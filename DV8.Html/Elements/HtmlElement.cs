@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+
 // ReSharper disable CollectionNeverUpdated.Global
 
 // ReSharper disable ArrangeRedundantParentheses
@@ -11,33 +12,25 @@ namespace DV8.Html.Elements
 {
     public class HtmlElement : IHtmlElement
     {
-        [Attr]
-        public string Id { get; set; }
+        [Attr] public string Id { get; set; }
 
-        [Attr]
-        public string Style { get; set; }
+        [Attr] public string Style { get; set; }
 
-        [Attr]
-        public string Title { get; set; }
+        [Attr] public string Title { get; set; }
 
-        [Attr("class")]
-        public string Clz { get; set; }
+        [Attr("class")] public string Clz { get; set; }
 
-        [Attr]
-        public bool Itemscope { get; set; }
+        [Attr] public bool Itemscope { get; set; }
 
-        [Attr]
-        public string Itemtype { get; set; }
+        [Attr] public string Itemtype { get; set; }
 
-        [Attr]
-        public string Itemprop { get; set; }
+        [Attr] public string Itemprop { get; set; }
 
         public string Tag { get; }
 
         public string Text { get; set; }
 
         public readonly IDictionary<string, string> ExAttributes = new Dictionary<string, string>();
-
 
 
         public IHtmlElement[] Subs { get; set; } = new IHtmlElement[0];
@@ -53,10 +46,10 @@ namespace DV8.Html.Elements
             Text = txt;
         }
 
-        public string GetTag() 
+        public string GetTag()
             => Tag?.ToLower() ?? GetType().Name.ToLower();
 
-        public IHtmlElement[] ToArray() => new IHtmlElement[] { this };
+        public IHtmlElement[] ToArray() => new IHtmlElement[] {this};
 
         public virtual string ToHtml()
         {
@@ -107,10 +100,17 @@ namespace DV8.Html.Elements
         public void WriteAttribute(TextWriter writer, string attrName, object val)
         {
             writer.Write(" ");
-            writer.Write(attrName);
 
-            if (!(val is bool))
+            if (val is bool b && b)
             {
+                writer.Write(attrName);
+                writer.Write("='");
+                writer.Write(attrName);
+                writer.Write('\'');
+            }
+            else
+            {
+                writer.Write(attrName);
                 writer.Write("='");
                 writer.Write(val);
                 writer.Write('\'');
