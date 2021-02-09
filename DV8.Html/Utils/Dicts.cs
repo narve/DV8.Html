@@ -39,7 +39,7 @@ namespace DV8.Html.Utils
 //        }
 
         public static bool HasValue(this Dictionary<string, List<string>> multiDict, string key) => 
-            multiDict.HasNonNullValue(key) && multiDict[key].Any(s => !String.IsNullOrEmpty(s));
+            multiDict.HasNonNullValue(key) && multiDict[key].Any(s => !string.IsNullOrEmpty(s));
 
         public static bool HasNonNullValue<TK, TV>(this IDictionary<TK, TV> dict, TK key) => 
             dict.ContainsKey(key) && dict[key] != null;

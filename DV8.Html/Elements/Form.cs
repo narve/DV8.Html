@@ -59,15 +59,15 @@ namespace DV8.Html.Elements
             var dict = new Dictionary<string, List<string>>();
             Subs?
                 .OfTypeRecur<Input>()
-                .Where(i => !String.IsNullOrEmpty(i.Name?.ToString()) && !String.IsNullOrEmpty(i.Value?.ToString()))
+                .Where(i => !string.IsNullOrEmpty(i.Name?.ToString()) && !string.IsNullOrEmpty(i.Value?.ToString()))
                 .ForEach(i => dict[i.Name.ToString()] = new[] {i.Value.ToString()}.ToList());
             Subs?
                 .OfTypeRecur<Select>()
-                .Where(i => !String.IsNullOrEmpty(i.Name?.ToString()))
+                .Where(i => !string.IsNullOrEmpty(i.Name?.ToString()))
                 .Select(s => new
                 {
                     name = s.Name,
-                    value = String.Join(",", s.Subs.OfTypeRecur<Option>().Where(o => o.Selected).Select(o => o.Value).ToArray())
+                    value = string.Join(",", s.Subs.OfTypeRecur<Option>().Where(o => o.Selected).Select(o => o.Value).ToArray())
                 })
                 .ForEach(i => dict[i.name.ToString()] = new[] {i.value.ToString()}.ToList());
             if (Disabled)
