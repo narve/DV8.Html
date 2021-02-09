@@ -1,8 +1,5 @@
-﻿using System.Linq;
-using DV8.Html.Elements;
-using DV8.Html.Serialization;
+﻿using DV8.Html.Elements;
 using NUnit.Framework;
-using static NUnit.Framework.Assert;
 
 namespace DV8.Html.Tests
 {

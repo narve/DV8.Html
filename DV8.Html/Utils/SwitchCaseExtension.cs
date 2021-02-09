@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DV8.Html.Utils
+﻿namespace DV8.Html.Utils
 {
     public static class SwitchCaseExtension
     {
