@@ -9,7 +9,7 @@ namespace DV8.Html.Serialization
 {
     public class PropsSerializer : IHtmlSerializer
     {
-        public bool IncludeType { get; set; } = false;
+        public bool IncludeType { get; set; }
 
         public bool CanSerialize(object x) => true;
 

@@ -30,7 +30,7 @@ namespace DV8.Html.Elements
 
         public string Text { get; set; }
 
-        public readonly IDictionary<string, string> ExAttributes = new Dictionary<string, string>();
+        public IDictionary<string, string> ExAttributes = new Dictionary<string, string>();
 
 
         public IHtmlElement[] Subs { get; set; } = new IHtmlElement[0];
