@@ -65,7 +65,7 @@ namespace DV8.Html.Elements
                 WriteAttribute(writer, attrName, val);
             }
 
-            foreach (var (key, value) in ExAttributes)
+            foreach (var (key, value) in ExAttributes ?? new Dictionary<string, string>())
             {
                 WriteAttribute(writer, key, value);
             }

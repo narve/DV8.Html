@@ -6,8 +6,8 @@ namespace DV8.Html.Serialization
 {
     public class FuncHtmlSerializer : IHtmlSerializer
     {
-        public Func<object, bool> Predicate;
-        public Func<object, int, IHtmlSerializer, IEnumerable<IHtmlElement>> Serializer;
+        public readonly Func<object, bool> Predicate;
+        public readonly Func<object, int, IHtmlSerializer, IEnumerable<IHtmlElement>> Serializer;
 
         public FuncHtmlSerializer(Func<object, bool> predicate, Func<object, int, IHtmlSerializer, IEnumerable<IHtmlElement>> serializer)
         {
