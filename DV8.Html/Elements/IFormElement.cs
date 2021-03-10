@@ -8,7 +8,7 @@
         [Attr]
         string Name { get; set; }
 
-        object Value { get; set; }
+        // object Value { get; set; }
 
         [Attr]
         bool Required { get; set; }

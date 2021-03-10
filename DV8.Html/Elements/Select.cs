@@ -18,15 +18,15 @@ namespace DV8.Html.Elements
         [Attr]
         public object Size { get; set; }
 
-        [Attr]
-        public object Value
-        {
-            get { return Subs.OfType<Option>().SingleOrDefault(o => o.Selected); }
-            set
-            {
-                throw new ArgumentException("NYI");
-            }
-        }
+        // [Attr]
+        // public object Value
+        // {
+        //     get { return Subs.OfType<Option>().SingleOrDefault(o => o.Selected); }
+        //     set
+        //     {
+        //         throw new ArgumentException("NYI");
+        //     }
+        // }
 
         [Attr]
         public bool Required { get; set; }
