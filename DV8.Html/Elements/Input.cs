@@ -10,6 +10,12 @@
 
         [Attr]
         public string Pattern { get; set; }
+        
+        /// <summary>
+        /// Seconds (for time at least)
+        /// </summary>
+        [Attr]
+        public int Step { get; set; }
 
         [Attr]
         public string PlaceHolder { get; set; }
