@@ -57,7 +57,8 @@ namespace DV8.Html.Serialization
                 HtmlSupport.Firsts.Add("Id");
             }
 
-            ser.Add(o => o is IHtmlElement, o => (o as IHtmlElement).ToArray());
+            ser.Add(o => o == null, o => Array.Empty<IHtmlElement>());
+            ser.Add(o => o is IHtmlElement, o => ((IHtmlElement)o).ToArray());
             ser.Add(o => !IsNonPrimitive(o), o => new Span(o.ToString()).ToArray());
             ser.Add(o => o is IEnumerable, o => new ListSerializer().Serialize(o, 3, ser));
             ser.Add(IsNonPrimitive, o => new PropsSerializer{IncludeType = true}.Serialize(o, 3, ser));

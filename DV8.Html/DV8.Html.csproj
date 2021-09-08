@@ -3,8 +3,8 @@
     <PropertyGroup>
         <RootNamespace>DV8.Html</RootNamespace>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>1.1.5</PackageVersion>
-        <TargetFrameworks>netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
+        <PackageVersion>1.1.6</PackageVersion>
+        <TargetFrameworks>net5.0;netcoreapp3.1</TargetFrameworks>
     </PropertyGroup>
 
     <ItemGroup>
