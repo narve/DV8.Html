@@ -24,7 +24,11 @@ namespace DV8.Html.Serialization
                     .SelectMany(a => new IHtmlElement[]
                     {
                         new Dt(a.Name),
-                        new Dd {Subs = fac.Serialize(a.Val, lvl - 1, fac).ToArray()}
+                        new Dd
+                        {
+                            Itemprop = a.Name,
+                            Subs = fac.Serialize(a.Val, lvl - 1, fac).ToArray()
+                        }
                     })
                     .ToArray();
                 return new Ul
