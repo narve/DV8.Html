@@ -4,13 +4,13 @@
 
         <IsPackable>false</IsPackable>
 
-        <LangVersion>8</LangVersion>
+        <LangVersion>default</LangVersion>
 
         <OutputType>Library</OutputType>
 
         <PackageVersion>1.0.7</PackageVersion>
 
-        <TargetFramework>net5.0</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>

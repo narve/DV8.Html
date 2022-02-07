@@ -11,6 +11,19 @@ namespace DV8.Html.Tests
     public class PropsSerializerTests
     {
         [Test]
+        public void Serializing_IncludesStyle()
+        {
+            // Arrange: 
+            var th = new Th { Style = "display:none" };
+
+            // Act
+            var s = th.ToHtml();
+
+            // Assert: 
+            True(s.Contains("display:none"));
+        }
+
+        [Test]
         public void Serializing_WithIncludeType_ShouldIncludeType()
         {
             // Arrange
@@ -73,13 +86,13 @@ namespace DV8.Html.Tests
                 }
                 // catch (Exception e)
                 // {
-                    // return new Span("ERROR").ToArray();
+                // return new Span("ERROR").ToArray();
                 // }
             });
             HtmlSerializerRegistry.AddDefaults(ser);
             ser.Serialize(null, 3, ser);
-            
-            
+
+
             IDictionary<string, object> toSer = new Dictionary<string, object>
             {
                 { "key1", "val1" },
