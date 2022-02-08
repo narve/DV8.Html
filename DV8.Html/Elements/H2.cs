@@ -2,7 +2,7 @@
 {
     public class H2: HtmlElement
     {
-        public H2(string txt): base("h1", txt)
+        public H2(string txt): base("h2", txt)
         {
         }
     }
