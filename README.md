@@ -1,5 +1,7 @@
+DV8.Html
+========
 
-https://github.com/narve/DV8.Html: HTML Elements and Html Serializer
+HTML Elements and Html Serializer
 
 This project is a dead simple and dependency free package to work with HTML elements from C# code. 
 
@@ -36,20 +38,6 @@ Example code for generating HTML:
         var htmlString = html.ToHtml();
 
 
-
-(Old) example code for generating HTML.  
-
-    var items = myList.Select( o => new P( o.GetSomeLineOfText()); 
-
-    var div = new Div
-            {
-                Clz = "results",
-                Subs = elements.ToArray(),
-            }; 
-            
-            
-    var html = div.ToHtml();
-    
     
 Example code for serializing objects to HTML (recursing max 3 levels into properties)
 

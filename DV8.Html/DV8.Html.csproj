@@ -1,12 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <PackageDescription>C# package for generating HTML elements and serializing objects to HTML</PackageDescription>
         <RootNamespace>DV8.Html</RootNamespace>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>1.7</PackageVersion>
+        <PackageVersion>1.8</PackageVersion>
         <TargetFrameworks>net6.0;netcoreapp3.1</TargetFrameworks>
         <LangVersion>10</LangVersion>
         <PackageReadmeFile>README.md</PackageReadmeFile>
+        <RepositoryUrl>https://github.com/narve/DV8.Html</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageProjectUrl>https://github.com/narve/DV8.Html</PackageProjectUrl>
     </PropertyGroup>
     <ItemGroup>
         <None Include="../README.md" Pack="true" PackagePath="/"/>
