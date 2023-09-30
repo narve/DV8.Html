@@ -3,9 +3,10 @@
     <PropertyGroup>
         <RootNamespace>DV8.Html</RootNamespace>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>1.6</PackageVersion>
+        <PackageVersion>1.7</PackageVersion>
         <TargetFrameworks>net6.0;netcoreapp3.1</TargetFrameworks>
         <LangVersion>10</LangVersion>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
     <ItemGroup>
         <None Include="../README.md" Pack="true" PackagePath="/"/>
