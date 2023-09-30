@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using DV8.Html.Elements;
 using DV8.Html.Utils;
-using Newtonsoft.Json;
+// using Newtonsoft.Json;
 
 // ReSharper disable PossibleNullReferenceException
 
@@ -162,17 +162,11 @@ public static class HtmlSupport
         
     public static bool ShouldInclude(MemberInfo mi)
     {
-        if (mi.HasAttr<JsonIgnoreAttribute>())
+        var ignored = mi.CustomAttributes.Any(a => a.AttributeType.Name.StartsWith("JsonIgnore")); 
+        if(ignored)
             return false;
 
-        var ignores = new string[]
-        {
-//                nameof(IWebActions.ListActions),
-//                nameof(ProcDef.Xml),
-//                nameof(ProcDef.Nodes),
-//                nameof(ISelf.SelfUrl),
-        };
-        return !ignores.Contains(mi.Name);
+        return true;
     }
 
     public static List<MemberInfo> PropsOf(Type x)
