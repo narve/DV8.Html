@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace DV8.Html.Elements
+namespace DV8.Html.Elements;
+
+public interface IHtmlSerializable
 {
-    public interface IHtmlSerializable
-    {
-        IEnumerable<IHtmlElement> Serialize(int lvl, IHtmlSerializer fac);
-    }
+    IEnumerable<IHtmlElement> Serialize(int lvl, IHtmlSerializer fac);
 }

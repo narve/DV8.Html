@@ -6,106 +6,105 @@ using DV8.Html.Serialization;
 using NUnit.Framework;
 using static NUnit.Framework.Assert;
 
-namespace DV8.Html.Tests
+namespace DV8.Html.Tests;
+
+public class PropsSerializerTests
 {
-    public class PropsSerializerTests
+    [Test]
+    public void Serializing_IncludesStyle()
     {
-        [Test]
-        public void Serializing_IncludesStyle()
+        // Arrange: 
+        var th = new Th { Style = "display:none" };
+
+        // Act
+        var s = th.ToHtml();
+
+        // Assert: 
+        True(s.Contains("display:none"));
+    }
+
+    [Test]
+    public void Serializing_WithIncludeType_ShouldIncludeType()
+    {
+        // Arrange
+        var ser = HtmlSerializerRegistry.AddDefaults(new HtmlSerializerRegistry());
+
+        // Act
+        var elements = ser.Serialize(new SamplePoco
         {
-            // Arrange: 
-            var th = new Th { Style = "display:none" };
+            StringProp = "stringval",
+        }, 3, ser).ToArray();
 
-            // Act
-            var s = th.ToHtml();
+        // Assert
+        AreEqual(1, elements.Length);
+        AreEqual("SamplePoco", elements[0].Subs[1].Text);
+    }
 
-            // Assert: 
-            True(s.Contains("display:none"));
-        }
+    [Test]
+    public void Serializing_Array_ShouldBeUlWithLiWithDl()
+    {
+        // Arrange
+        var ser = HtmlSerializerRegistry.AddDefaults(new HtmlSerializerRegistry());
 
-        [Test]
-        public void Serializing_WithIncludeType_ShouldIncludeType()
+        // Act
+        var elements = ser.Serialize(new[]
         {
-            // Arrange
-            var ser = HtmlSerializerRegistry.AddDefaults(new HtmlSerializerRegistry());
-
-            // Act
-            var elements = ser.Serialize(new SamplePoco
+            new SamplePoco
             {
                 StringProp = "stringval",
-            }, 3, ser).ToArray();
+            }
+        }, 3, ser).ToArray();
 
-            // Assert
-            AreEqual(1, elements.Length);
-            AreEqual("SamplePoco", elements[0].Subs[1].Text);
-        }
+        // Assert
+        AreEqual("ul", elements[0].Tag);
+        AreEqual("li", elements[0].Subs[0].Tag);
+        AreEqual("dl", elements[0].Subs[0].Subs[0].Tag);
+    }
 
-        [Test]
-        public void Serializing_Array_ShouldBeUlWithLiWithDl()
+    [Test]
+    public void Serialize_DateTime()
+    {
+        var ser = HtmlSerializerRegistry.AddDefaults(new HtmlSerializerRegistry());
+
+        var toSer = new SamplePoco
         {
-            // Arrange
-            var ser = HtmlSerializerRegistry.AddDefaults(new HtmlSerializerRegistry());
+            DateProp = DateTime.Now,
+        };
 
-            // Act
-            var elements = ser.Serialize(new[]
-            {
-                new SamplePoco
-                {
-                    StringProp = "stringval",
-                }
-            }, 3, ser).ToArray();
+        var elements = ser.Serialize(toSer, 3);
+    }
 
-            // Assert
-            AreEqual("ul", elements[0].Tag);
-            AreEqual("li", elements[0].Subs[0].Tag);
-            AreEqual("dl", elements[0].Subs[0].Subs[0].Tag);
-        }
-
-        [Test]
-        public void Serialize_DateTime()
+    [Test]
+    public void Serialize_Dict_With_Nulls()
+    {
+        var ser = new HtmlSerializerRegistry();
+        ser.Add(o => o is IDictionary<string, object>, o =>
         {
-            var ser = HtmlSerializerRegistry.AddDefaults(new HtmlSerializerRegistry());
-
-            var toSer = new SamplePoco
+            // try
             {
-                DateProp = DateTime.Now,
-            };
+                return new GenDictSerializer().Serialize(o, 3, ser);
+            }
+            // catch (Exception e)
+            // {
+            // return new Span("ERROR").ToArray();
+            // }
+        });
+        HtmlSerializerRegistry.AddDefaults(ser);
+        ser.Serialize(null, 3, ser);
 
-            var elements = ser.Serialize(toSer, 3);
-        }
 
-        [Test]
-        public void Serialize_Dict_With_Nulls()
+        IDictionary<string, object> toSer = new Dictionary<string, object>
         {
-            var ser = new HtmlSerializerRegistry();
-            ser.Add(o => o is IDictionary<string, object>, o =>
+            { "key1", "val1" },
+            { "key2", null },
             {
-                // try
+                "key3", new Dictionary<string, object>
                 {
-                    return new GenDictSerializer().Serialize(o, 3, ser);
+                    { "key4", null }
                 }
-                // catch (Exception e)
-                // {
-                // return new Span("ERROR").ToArray();
-                // }
-            });
-            HtmlSerializerRegistry.AddDefaults(ser);
-            ser.Serialize(null, 3, ser);
+            }
+        };
 
-
-            IDictionary<string, object> toSer = new Dictionary<string, object>
-            {
-                { "key1", "val1" },
-                { "key2", null },
-                {
-                    "key3", new Dictionary<string, object>
-                    {
-                        { "key4", null }
-                    }
-                }
-            };
-
-            // var elements = ser.Serialize(toSer, 3, ser);
-        }
+        // var elements = ser.Serialize(toSer, 3, ser);
     }
 }

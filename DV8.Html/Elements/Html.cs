@@ -1,10 +1,9 @@
-﻿namespace DV8.Html.Elements
+﻿namespace DV8.Html.Elements;
+
+public class Html : HtmlElement
 {
-    public class Html : HtmlElement
+    public override string ToHtml()
     {
-        public override string ToHtml()
-        {
-            return "<!DOCTYPE html>" + base.ToHtml();
-        }
+        return "<!DOCTYPE html>" + base.ToHtml();
     }
 }

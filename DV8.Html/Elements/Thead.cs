@@ -1,6 +1,5 @@
-﻿namespace DV8.Html.Elements
+﻿namespace DV8.Html.Elements;
+
+public class Thead : HtmlElement
 {
-    public class Thead : HtmlElement
-    {
-    }
 }

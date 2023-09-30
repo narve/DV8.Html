@@ -1,17 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace DV8.Html.Elements
-{
-    public class Ul : HtmlElement
-    {
-        public Ul()
-        {
-        }
+namespace DV8.Html.Elements;
 
-        public Ul(IEnumerable<IHtmlElement> subs)
-        {
-            Subs = subs.ToArray(); 
-        }
+public class Ul : HtmlElement
+{
+    public Ul()
+    {
+    }
+
+    public Ul(IEnumerable<IHtmlElement> subs)
+    {
+        Subs = subs.ToArray(); 
     }
 }

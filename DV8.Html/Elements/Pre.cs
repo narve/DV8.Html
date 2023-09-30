@@ -1,10 +1,9 @@
-﻿namespace DV8.Html.Elements
+﻿namespace DV8.Html.Elements;
+
+public class Pre : HtmlElement
 {
-    public class Pre : HtmlElement
+    public Pre(string s)
     {
-        public Pre(string s)
-        {
-            Text = s; 
-        }
+        Text = s; 
     }
 }

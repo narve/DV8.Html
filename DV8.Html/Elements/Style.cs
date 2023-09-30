@@ -1,11 +1,10 @@
-﻿namespace DV8.Html.Elements
+﻿namespace DV8.Html.Elements;
+
+public class Style: HtmlElement
 {
-    public class Style: HtmlElement
+    public Style(string content)
     {
-        public Style(string content)
-        {
-            this.Text = content;
-        }
-        
+        this.Text = content;
     }
+        
 }

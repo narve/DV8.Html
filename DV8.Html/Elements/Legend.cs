@@ -1,10 +1,9 @@
-﻿namespace DV8.Html.Elements
+﻿namespace DV8.Html.Elements;
+
+public class Legend: HtmlElement
 {
-    public class Legend: HtmlElement
+    public Legend(string n)
     {
-        public Legend(string n)
-        {
-            Text = n;
-        }
+        Text = n;
     }
 }

@@ -1,7 +1,6 @@
-﻿namespace DV8.Html.Elements
+﻿namespace DV8.Html.Elements;
+
+public class Head : HtmlElement
 {
-    public class Head : HtmlElement
-    {
         
-    }
 }

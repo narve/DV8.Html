@@ -1,16 +1,15 @@
-﻿namespace DV8.Html.Elements
+﻿namespace DV8.Html.Elements;
+
+public interface IFormElement: IHtmlElement
 {
-    public interface IFormElement: IHtmlElement
-    {
-        [Attr]
-        bool Disabled { get; set; }
+    [Attr]
+    bool Disabled { get; set; }
 
-        [Attr]
-        string Name { get; set; }
+    [Attr]
+    string Name { get; set; }
 
-        // object Value { get; set; }
+    // object Value { get; set; }
 
-        [Attr]
-        bool Required { get; set; }
-    }
+    [Attr]
+    bool Required { get; set; }
 }

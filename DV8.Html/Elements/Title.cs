@@ -1,10 +1,13 @@
-﻿namespace DV8.Html.Elements
+﻿namespace DV8.Html.Elements;
+
+public class Title : HtmlElement
 {
-    public class Title : HtmlElement
+    public Title()
     {
-        public Title(string txt = null)
-        {
-            Text = txt; 
-        }
+    }
+
+    public Title(string txt = null)
+    {
+        Text = txt; 
     }
 }

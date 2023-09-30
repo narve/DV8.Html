@@ -1,13 +1,12 @@
 ﻿
-namespace DV8.Html.Elements
-{
-    public class Table: HtmlElement
-    {
-        public string Name { get; set; }
+namespace DV8.Html.Elements;
 
-        public override string ToString()
-        {
-            return Name; 
-        }
+public class Table: HtmlElement
+{
+    public string Name { get; set; }
+
+    public override string ToString()
+    {
+        return Name; 
     }
 }

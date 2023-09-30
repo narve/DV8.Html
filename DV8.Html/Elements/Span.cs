@@ -1,10 +1,9 @@
-﻿namespace DV8.Html.Elements
+﻿namespace DV8.Html.Elements;
+
+public class Span : HtmlElement
 {
-    public class Span : HtmlElement
+    public Span(string s)
     {
-        public Span(string s)
-        {
-            Text = s; 
-        }
+        Text = s; 
     }
 }
