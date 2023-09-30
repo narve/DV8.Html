@@ -31,4 +31,10 @@ public static class Underscore
         {
             Text = text
         };
+
+    public static TextContent _(string text) =>
+        new(text);
+
+    public static RawTextContent _UNSAFE(string text) =>
+        new(text);
 }

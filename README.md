@@ -19,8 +19,8 @@ Example code for generating HTML:
         using E = DV8.Html.Elements;
         using static DV8.Html.Prefixes.Underscore;
         ...
-        var strings = new [] {"Apple", "Banana", "Cherry"};
-        var html = 
+       var fruits = new[] { "Apple", "Banana", "Cherry" };
+        var html =
             _<E.Html>(
                 _<Head>(
                     _<Title>("Hello, World!")
@@ -28,17 +28,26 @@ Example code for generating HTML:
                 _<Body>(
                     _<H1>("Hello, World!"),
                     _<P>(
-                        "This is a test."
+                        _("This is a paragraph with <>. "), // Becomes plain text, not an element. Text is escaped. 
+                        _<Ul>(
+                            fruits.Select(_<Li>)
+                        )
                     ),
-                    _<Ul>(
-                        strings.Select(_<Li>)
-                    )
+                    _UNSAFE("This will not be <b>escaped</b>") // Allows any HTML, don't use this with untrusted content. 
                 )
             );
-        var htmlString = html.ToHtml();
+        var act = html.ToHtml();
+        var exp = @"
+        <!DOCTYPE html><html>
+        <head><title>Hello, World!</title></head>
+        <body><h1>Hello, World!</h1><p>This is a paragraph with &lt;&gt;. <ul><li>Apple</li><li>Banana</li><li>Cherry</li></ul></p>
+        This will not be <b>escaped</b>
+        </body></html>";
+
+        Assert.AreEqual(exp.StringLineBreaks(), act).StringLineBreaks();
 
 
-    
+
 Example code for serializing objects to HTML (recursing max 3 levels into properties)
 
     var ser = HtmlSerializerRegistry.AddDefaults(new HtmlSerializerRegistry());

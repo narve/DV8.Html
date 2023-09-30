@@ -33,7 +33,7 @@ public class HtmlElement : IHtmlElement
     public IDictionary<string, string> ExAttributes = new Dictionary<string, string>();
 
 
-    public IHtmlElement[] Subs { get; set; } = new IHtmlElement[0];
+    public IHtmlElement[] Subs { get; set; } = Array.Empty<IHtmlElement>();
 
     public HtmlElement()
     {
@@ -73,7 +73,7 @@ public class HtmlElement : IHtmlElement
         writer.WriteLine(">");
 
         writer.Write(Text);
-        foreach (var o in Subs ?? new IHtmlElement[0])
+        foreach (var o in Subs ?? Array.Empty<IHtmlElement>())
         {
             writer.WriteLine(o?.ToHtml() ?? "");
             writer.WriteLine();
@@ -97,7 +97,7 @@ public class HtmlElement : IHtmlElement
         return writer.ToString();
     }
 
-    public void WriteAttribute(TextWriter writer, string attrName, object val)
+    public static void WriteAttribute(TextWriter writer, string attrName, object val)
     {
         writer.Write(" ");
 
