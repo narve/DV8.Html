@@ -1,5 +1,6 @@
-using System.Collections.Generic;
-using System.Web;
+// using System.Web;
+
+using System.Net;
 
 namespace DV8.Html.Elements;
 
@@ -9,7 +10,7 @@ public class TextContent : HtmlElement
     {
     }
 
-    public TextContent(string text) => Text = HttpUtility.HtmlEncode(text);
+    public TextContent(string text) => Text = WebUtility.HtmlEncode(text);
 
     public override string ToHtml() => Text;
 }
