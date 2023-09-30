@@ -8,7 +8,36 @@ In addition, there is support for serializing objects and graphs of objects to H
 Lots of elements and attributes are implemented, and you can generate missing elements/attributes at 
 run time by specifying element/attribute names.  
 
-Example code for generating HTML.  
+Various helper methods are available to make it easy to work with attributes and elements.
+
+See the test classes for more info. 
+
+Example code for generating HTML: 
+
+        using E = DV8.Html.Elements;
+        using static DV8.Html.Prefixes.Underscore;
+        ...
+        var strings = new [] {"Apple", "Banana", "Cherry"};
+        var html = 
+            _<E.Html>(
+                _<Head>(
+                    _<Title>("Hello, World!")
+                ),
+                _<Body>(
+                    _<H1>("Hello, World!"),
+                    _<P>(
+                        "This is a test."
+                    ),
+                    _<Ul>(
+                        strings.Select(_<Li>)
+                    )
+                )
+            );
+        var htmlString = html.ToHtml();
+
+
+
+(Old) example code for generating HTML.  
 
     var items = myList.Select( o => new P( o.GetSomeLineOfText()); 
 
