@@ -4,7 +4,7 @@ namespace DV8.Html.Framework;
 
 public class Attr : Attribute
 {
-    public string name;
+    public string Name { get; set; }
 
     public Attr()
     {
@@ -12,6 +12,6 @@ public class Attr : Attribute
 
     public Attr(string name)
     {
-        this.name = name;
+        Name = name;
     }
 }

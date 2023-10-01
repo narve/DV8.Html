@@ -5,7 +5,7 @@ using NUnit.Framework;
 using E = DV8.Html.Elements;
 using static DV8.Html.Prefixes.Underscore;
 
-namespace DV8.Html.Tests;
+namespace DV8.Html.Tests.HtmlElementTests;
 
 public class UnderscoreTests
 {

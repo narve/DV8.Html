@@ -2,7 +2,7 @@
 
 namespace DV8.Html.Elements;
 
-public class Script: HtmlElement
+public class Script : HtmlElement
 {
     [Attr]
     public string Src { get; set; }
@@ -12,4 +12,14 @@ public class Script: HtmlElement
 
     [Attr]
     public string Type { get; set; }
+
+    public Script()
+    {
+    }
+
+    public Script(string txt)
+    {
+        if (!string.IsNullOrEmpty(txt))
+            Subs.Add(new UnsafeTextContent(txt));
+    }
 }

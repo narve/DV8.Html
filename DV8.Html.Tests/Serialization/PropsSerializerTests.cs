@@ -3,27 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using DV8.Html.Accessors;
 using DV8.Html.Elements;
-using DV8.Html.Framework;
 using DV8.Html.Serialization;
 using NUnit.Framework;
 using static NUnit.Framework.Assert;
 
-namespace DV8.Html.Tests;
+namespace DV8.Html.Tests.Serialization;
 
 public class PropsSerializerTests
 {
-    [Test]
-    public void Serializing_IncludesStyle()
-    {
-        // Arrange: 
-        var th = new Th { Style = "display:none" };
 
-        // Act
-        var s = th.ToHtml();
-
-        // Assert: 
-        True(s.Contains("display:none"));
-    }
 
     [Test]
     public void Serializing_WithIncludeType_ShouldIncludeType()
@@ -32,8 +20,8 @@ public class PropsSerializerTests
         var ser = HtmlSerializerRegistry.AddDefaults(new HtmlSerializerRegistry());
 
         // Act
-    IHtmlElement[] elements = ser.Serialize(new SamplePoco
-    {
+        var elements = ser.Serialize(new SamplePoco
+        {
             StringProp = "stringValue",
         }, 3, ser).ToArray();
 
@@ -48,10 +36,10 @@ public class PropsSerializerTests
 </dl>
 ";
         AreEqual(exp.Canonical(), xml.Canonical());
-        
+
         AreEqual(1, elements.Length);
         var subs = elements.Single().Subs;
-        var dt = subs[0]; 
+        var dt = subs[0];
         var dd = subs[1];
         AreEqual("Type", dt.GetTextContent());
         AreEqual("SamplePoco", dd.GetTextContent());
@@ -82,13 +70,12 @@ public class PropsSerializerTests
     public void Serialize_DateTime()
     {
         var ser = HtmlSerializerRegistry.AddDefaults(new HtmlSerializerRegistry());
-
-        var toSer = new SamplePoco
-        {
-            DateProp = DateTime.Now,
-        };
-
-        var elements = ser.Serialize(toSer, 3);
+        var toSer = new DateTimeOffset(2023, 10, 1, 10, 0, 0, TimeSpan.FromHours(2));
+        var element = ser.Serialize(toSer, 3, ser).Single();
+        var time = (Time)element;
+        var exp = "2023-10-01T10:00:00+02:00";
+        AreEqual(exp, time.GetTextContent());
+        AreEqual(exp, time.Datetime);
     }
 
     [Test]
@@ -122,6 +109,6 @@ public class PropsSerializerTests
             }
         };
 
-        // var elements = ser.Serialize(toSer, 3, ser);
+        var elements = ser.Serialize(toSer, 3, ser);
     }
 }

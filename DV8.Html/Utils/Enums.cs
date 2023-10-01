@@ -23,5 +23,5 @@ public static class Enums
     public static string ToString(Type enumType, int? value) =>
         value == null ? null : Enum.GetName(enumType, value) ?? enumType.Name + "[" + value + "]";
 
-    public static string ToIntList<T>(string arg) => arg.Split(',').Select(Enums.ParseEnum<T>).Cast<int>().ItemsToString();
+    public static string ToIntList<T>(string arg) => arg.Split(',').Select(ParseEnum<T>).Cast<int>().ItemsToString();
 }

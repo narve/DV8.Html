@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 using DV8.Html.Serialization;
 using NUnit.Framework;
 
-namespace DV8.Html.Tests;
+namespace DV8.Html.Tests.Serialization;
 
 public class MyClass
 {

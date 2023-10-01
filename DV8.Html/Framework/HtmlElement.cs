@@ -52,11 +52,11 @@ public class HtmlElement : IHtmlElement
     /// Creates a new HtmlElement with the given tag name and optional text content.
     /// </summary>
     /// <param name="tagName">defaults to the lower case name of the class</param>
-    /// <param name="txt"></param>
-    public HtmlElement(string? tagName = null, string? txt = null)
+    /// <param name="text"></param>
+    public HtmlElement(string? tagName = null, string? text = null)
     {
         Tag = tagName ?? GetTag();
-        AddIfNotEmpty(txt);
+        AddIfNotEmpty(text);
     }
 
 
@@ -108,7 +108,7 @@ public class HtmlElement : IHtmlElement
         foreach (var pi in DefinedAttributes().Where(AttributeHasValue))
         {
             var a = (Attr)pi.GetCustomAttribute(typeof(Attr))!;
-            var attrName = a.name ?? pi.Name.ToLower();
+            var attrName = a.Name ?? pi.Name.ToLower();
             var val =
                 pi.PropertyType == typeof(bool) ? attrName : pi.GetValue(this)!;
             // writer.WriteStartAttribute(attrName);

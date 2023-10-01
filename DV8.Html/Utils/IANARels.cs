@@ -28,12 +28,12 @@ public static class IANARels
         All = Array.AsReadOnly(
             typeof(IANARels).GetFields()
                 .Where(fi => fi.FieldType == typeof(string))
-                .Select(fi => fi.GetValue(null).ToString())
+                .Select(fi => fi.GetValue(null))
+                .Select(f => f?.ToString())
+                .Where(f => f != null)
                 .Where(s => !s.StartsWith("-"))
                 //                    .Where(s => !s.Contains("Suffix"))
                 .ToArray()
         );
     }
-
-
 }

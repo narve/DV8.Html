@@ -1,9 +1,9 @@
 ﻿using DV8.Html.Elements;
 using NUnit.Framework;
 
-namespace DV8.Html.Tests;
+namespace DV8.Html.Tests.HtmlElementTests;
 
-public class SerializeBooleans
+public class BooleansToHtml
 {
     [Test]
     public void BooleanAttributesShouldNotBeIncludedIfFalse()

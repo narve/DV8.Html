@@ -1,6 +1,6 @@
 using System;
 
-namespace DV8.Html.Tests;
+namespace DV8.Html.Tests.Serialization;
 
 public class SamplePoco
 {

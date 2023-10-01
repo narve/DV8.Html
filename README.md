@@ -1,7 +1,8 @@
 DV8.Html
 ========
 
-C# package with a HTML DSL and support for generating HTML elements and serializing object graphs to HTML
+C# package with a HTML DSL and support for generating HTML elements 
+and serializing object graphs to HTML
 
 This project is a dead simple and dependency free package to work with HTML elements from C# code. 
 
@@ -16,14 +17,14 @@ Various helper methods are available to make it easy to work with attributes and
 
 See the test classes for more info. 
 
-Example code for generating HTML: 
+Using a special syntax (DSL-like)for generating HTML
+----------------------------------------------------
 
-        using E = DV8.Html.Elements;
         using static DV8.Html.Prefixes.Underscore;
         ...
        var fruits = new[] { "Apple", "Banana", "Cherry" };
         var html =
-            _<E.Html>(
+            _<Html>(
                 _<Head>(
                     _<Title>("Hello, World!")
                 ),
@@ -50,25 +51,20 @@ Example code for generating HTML:
         Assert.AreEqual(exp.Canonical(), act).Canonical();
 
 
+Serialization
+-------------
 
 Example code for serializing objects to HTML (recursing max 3 levels into properties)
 
-    var ser = HtmlSerializerRegistry.AddDefaults(new HtmlSerializerRegistry());
-    
+    var ser = HtmlSerializerRegistry.AddDefaults(new HtmlSerializerRegistry()); 
     var elements = HtmlSerializer.Serialize(myListOrCustomObjectOrWhatever, 3);
-    
-    var div = new Div
-                {
-                    Clz = "results",
-                    Subs = elements.ToArray(),
-                };
-                
-    var html = div.ToHtml();
 
 
 This serializer can also be added as a HtmlOutputFormatter in Asp.Net, easily making all your JSON-APIs available 
 as straight, human-readable HTML. 
 
+Contributing
+------------
 
 In the very unlikely event that anybody actually is interested in this project: 
 Let me know (starring it on github is enough) and I'll improve documentation and samples :)

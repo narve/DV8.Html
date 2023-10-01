@@ -5,6 +5,7 @@ using System.Linq;
 using DV8.Html.Elements;
 using DV8.Html.Framework;
 using DV8.Html.Support;
+using static System.Globalization.CultureInfo;
 using static DV8.Html.Utils.Reflect;
 
 namespace DV8.Html.Serialization;
@@ -19,7 +20,7 @@ public class HtmlSerializerRegistry : IHtmlSerializer
     public IEnumerable<IHtmlElement> Serialize(object o, int lvl, IHtmlSerializer fac = null)
     {
         if( lvl < 0 )
-            return new IHtmlElement[0];
+            return Array.Empty<IHtmlElement>();
         var s = FindSerializer(o);
         if (s == null)
         {
@@ -58,8 +59,16 @@ public class HtmlSerializerRegistry : IHtmlSerializer
             HtmlSupport.Firsts.Add("Id");
         }
 
+        // string DateTimeToIso(DateTime d) => d.ToString("u", InvariantCulture).Replace(" ", "T");
+        // string DateTimeOffsetToIso(DateTimeOffset d) => d.ToString("u", InvariantCulture).Replace(" ", "T");
+        
+        string DateTimeToIso(DateTime d) => d.ToString("yyyy-MM-ddTHH:mm:ssK", InvariantCulture).Replace(" ", "T");
+        string DateTimeOffsetToIso(DateTimeOffset d) => d.ToString("yyyy-MM-ddTHH:mm:ssK", InvariantCulture).Replace(" ", "T");
+        
         ser.Add(o => o == null, _ => Array.Empty<IHtmlElement>());
         ser.Add(o => o is IHtmlElement, o => ((IHtmlElement)o).ToArray());
+        ser.Add(o => o is DateTimeOffset, o => new Time(DateTimeOffsetToIso((DateTimeOffset)o), DateTimeOffsetToIso((DateTimeOffset)o)).ToArray());
+        ser.Add(o => o is DateTime, o => new Time(DateTimeToIso((DateTime)o), DateTimeToIso((DateTime)o)).ToArray());
         ser.Add(o => !IsNonPrimitive(o), o => new Span(o.ToString()).ToArray());
         ser.Add(o => o is IEnumerable, o => new ListSerializer().Serialize(o, 3, ser));
         ser.Add(IsNonPrimitive, o => new PropsSerializer{IncludeType = true}.Serialize(o, 3, ser));
