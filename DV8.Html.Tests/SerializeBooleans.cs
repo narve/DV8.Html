@@ -15,7 +15,7 @@ public class SerializeBooleans
         var s = input.ToHtml();
 
         // Assert
-        StringAssert.Contains( "selected='selected'", s);
+        StringAssert.Contains( "selected='selected'", s.Canonical());
     }
         
     [Test]
