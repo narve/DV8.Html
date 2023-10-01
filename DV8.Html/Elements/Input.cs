@@ -4,6 +4,8 @@ namespace DV8.Html.Elements;
 
 public class Input : HtmlElement, IFormElement
 {
+    protected override bool AutoClose => false;
+    
     [Attr]
     public bool Disabled { get; set; }
 
@@ -34,19 +36,19 @@ public class Input : HtmlElement, IFormElement
     [Attr]
     public bool Readonly { get; set; }
 
+    [Attr]
+    public bool Required { get; set; }
+
+
     public Input Disable(bool d = true)
     {
         if (!d) return this;
-
-//            value += "[N/A]";
-        Clz += "disabled";
+        Clz += " disabled";
         Disabled = true;
         return this;
     }
 
-    [Attr]
-    public bool Required { get; set; }
-
+    
     public static Input ForString(string name, string value = null) => new Input
     {
         Id = name,

@@ -29,10 +29,7 @@ public class UnderscoreTests
                     _UNSAFE("This will <em>not</em> be escaped") // Allows any HTML, don't use this with untrusted content. 
                 )
             );
-
-        var title = html.Subs.OfTypeRecur<Title>().Single();
         
-        var act = html.ToHtml();
         var exp = @"
 <!DOCTYPE html><html>
 <head><title>Hello, World!</title></head>
@@ -40,6 +37,10 @@ public class UnderscoreTests
 This will <em>not</em> be escaped
 </body></html>";
         
-        Assert.AreEqual(exp.Canonical(), act.Canonical());
+        var actHtml = html.ToHtml();
+        Assert.AreEqual(exp.Canonical(), actHtml.Canonical());
+
+        var actXml = html.ToXml();
+        Assert.AreEqual(exp.Canonical(), actXml.Canonical());
     }
 }

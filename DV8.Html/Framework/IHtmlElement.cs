@@ -22,6 +22,8 @@ public interface IHtmlElement : IHtmlSerializable
     string Title { get; set; }
 
     public string ToHtml();
+    public string ToXml();
 
-    void WriteHtml(XmlWriter writer);
+    void WriteXml(XmlWriter writer);
+    void WriteHtml(HtmlWriter writer);
 }

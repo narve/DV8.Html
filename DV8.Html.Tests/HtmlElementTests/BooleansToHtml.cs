@@ -15,7 +15,7 @@ public class BooleansToHtml
         var s = input.ToHtml();
 
         // Assert
-        Assert.AreEqual("<input type='text'/>", s.Canonical());
+        Assert.AreEqual("<input type='text'>", s.Canonical());
         StringAssert.DoesNotContain( "disabled", s);
     }
 
@@ -29,7 +29,7 @@ public class BooleansToHtml
         var s = input.ToHtml();
 
         // Assert
-        Assert.AreEqual("<input disabled='disabled' type='text'/>", s.Canonical());
+        Assert.AreEqual("<input disabled='disabled' type='text'>", s.Canonical());
     }
     
     [Test]

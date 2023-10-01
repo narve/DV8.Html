@@ -1,3 +1,4 @@
+using System.Net;
 using System.Xml;
 using DV8.Html.Framework;
 
@@ -16,5 +17,6 @@ public class TextContent : HtmlElement
 
     public TextContent(string textThatWillBeEncoded) => Text = textThatWillBeEncoded;
 
-    public override void WriteHtml(XmlWriter writer) => writer.WriteString(Text);
+    public override void WriteXml(XmlWriter writer) => writer.WriteString(Text);
+    public override void WriteHtml(HtmlWriter writer) => writer.WriteRaw(WebUtility.HtmlEncode(Text));
 }

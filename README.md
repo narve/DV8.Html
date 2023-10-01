@@ -4,20 +4,36 @@ DV8.Html
 C# package with a HTML DSL and support for generating HTML elements 
 and serializing object graphs to HTML
 
-This project is a dead simple and dependency free package to work with HTML elements from C# code. 
+This project is a dead simple and dependency free package to work 
+with HTML elements from C# code. 
 
-In addition, there is support for serializing objects and graphs of objects to HTML. 
+In addition, there is support for serializing objects and graphs of 
+objects to HTML. 
 
-Lots of elements and attributes are implemented, and you can generate missing elements/attributes at 
+Lots of elements and attributes are implemented, and you can generate 
+missing elements/attributes at 
 run time by specifying element/attribute names.  
 
 Writing out non-standard / non-safe HTML code is also supported.
 
-Various helper methods are available to make it easy to work with attributes and elements.
+Various helper methods are available to make it easy to work with 
+attributes and elements.
 
 See the test classes for more info. 
 
-Using a special syntax (DSL-like)for generating HTML
+Requirements/Installation/Usage
+------------------
+
+Requirements: .Net Core 6.0 or later. 
+
+Dependencies: None.  
+
+Usage: 
+
+    dotnet add package DV8.Html
+
+
+Using the DSL-like syntax for generating HTML
 ----------------------------------------------------
 
         using static DV8.Html.Prefixes.Underscore;
@@ -51,10 +67,20 @@ Using a special syntax (DSL-like)for generating HTML
         Assert.AreEqual(exp.Canonical(), act).Canonical();
 
 
+Generating XML / XHTML
+----------------------
+
+Use ToXml instead of ToHtml if you want the output to be 
+correct XML. This uses the .Net XmlWriter class and is 
+probably safer and faster, however it will always close elements, 
+so an input becomes <input ... /> instead of <input ...>. 
+In addition, it will use " instead of ' as attribute delimiter.
+
+
 Serialization
 -------------
 
-Example code for serializing objects to HTML (recursing max 3 levels into properties)
+Example code for serializing objects to HTML (recursive to max 3 levels into properties)
 
     var ser = HtmlSerializerRegistry.AddDefaults(new HtmlSerializerRegistry()); 
     var elements = HtmlSerializer.Serialize(myListOrCustomObjectOrWhatever, 3);
