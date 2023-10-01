@@ -9,8 +9,7 @@ public class Ul : HtmlElement
     {
     }
 
-    public Ul(IEnumerable<IHtmlElement> subs)
+    public Ul(IEnumerable<IHtmlElement> subs) : base(subs)
     {
-        Subs = subs.ToArray(); 
     }
 }

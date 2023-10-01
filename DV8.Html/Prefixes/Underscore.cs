@@ -11,10 +11,16 @@ public static class Underscore
     public static T _<T>(IHtmlElement child) where T : IHtmlElement, new() =>
         new()
         {
-            Subs = new[] { child }
+            Subs = new List<IHtmlElement> { child }
         };
 
     public static T _<T>(params IHtmlElement[] children) where T : IHtmlElement, new() =>
+        new()
+        {
+            Subs = children.ToList()
+        };
+
+    public static T _<T>(List<IHtmlElement> children) where T : IHtmlElement, new() =>
         new()
         {
             Subs = children
@@ -23,18 +29,20 @@ public static class Underscore
     public static T _<T>(IEnumerable<IHtmlElement> children) where T : IHtmlElement, new() =>
         new()
         {
-            Subs = children.ToArray()
+            Subs = children.ToList()
         };
 
-    public static T _<T>(string text) where T : IHtmlElement, new() =>
-        new()
-        {
-            Text = text
-        };
+    public static T _<T>(string text) where T : IHtmlElement, new()
+    {
+        var t = new T();
+        if(!string.IsNullOrEmpty(text))
+            t.Subs.Add(new TextContent(text));
+        return t;
+    }
 
     public static TextContent _(string text) =>
         new(text);
 
-    public static RawTextContent _UNSAFE(string text) =>
+    public static UnsafeTextContent _UNSAFE(string text) =>
         new(text);
 }

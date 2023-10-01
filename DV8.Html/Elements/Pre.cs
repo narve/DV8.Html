@@ -2,8 +2,5 @@
 
 public class Pre : HtmlElement
 {
-    public Pre(string s)
-    {
-        Text = s; 
-    }
+    public Pre(string s) => AddIfNotEmpty(s);
 }

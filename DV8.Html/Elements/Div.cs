@@ -11,10 +11,10 @@ public class Div : HtmlElement
 
     public Div(IEnumerable<IHtmlElement> subs)
     {
-        Subs = subs.ToArray();
+        Subs.AddRange(subs);
     }
     public Div(params IHtmlElement[]subs)
     {
-        Subs = subs.ToArray();
+        Subs.AddRange(subs);
     }
 }

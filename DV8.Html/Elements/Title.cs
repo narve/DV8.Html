@@ -6,8 +6,7 @@ public class Title : HtmlElement
     {
     }
 
-    public Title(string txt = null)
+    public Title(string txt) : base(txt)
     {
-        Text = txt; 
     }
 }

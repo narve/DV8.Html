@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DV8.Html.Accessors;
 using DV8.Html.Elements;
 using DV8.Html.Serialization;
+using DV8.Html.Utils;
 using NUnit.Framework;
 using static NUnit.Framework.Assert;
 
@@ -30,14 +32,29 @@ public class PropsSerializerTests
         var ser = HtmlSerializerRegistry.AddDefaults(new HtmlSerializerRegistry());
 
         // Act
-        var elements = ser.Serialize(new SamplePoco
-        {
-            StringProp = "stringval",
+    IHtmlElement[] elements = ser.Serialize(new SamplePoco
+    {
+            StringProp = "stringValue",
         }, 3, ser).ToArray();
 
         // Assert
+
+        var xml = string.Join("", elements.Select(e => e.ToHtml()));
+        var exp = @"
+<dl itemscope=""itemscope"" itemtype=""http://dv8.no/SamplePoco"">  
+<dt>Type</dt>  <dd title=""http://dv8.no/SamplePoco"">SamplePoco</dd>  
+<dt>BoolProp</dt>  <dd itemprop=""boolProp"">    <span>False</span>  </dd>  
+<dt>StringProp</dt>  <dd itemprop=""stringProp"">    <span>stringValue</span>  </dd>
+</dl>
+";
+        AreEqual(exp.Canonical(), xml.Canonical());
+        
         AreEqual(1, elements.Length);
-        AreEqual("SamplePoco", elements[0].Subs[1].Text);
+        var subs = elements.Single().Subs;
+        var dt = subs[0]; 
+        var dd = subs[1];
+        AreEqual("Type", dt.GetTextContent());
+        AreEqual("SamplePoco", dd.GetTextContent());
     }
 
     [Test]

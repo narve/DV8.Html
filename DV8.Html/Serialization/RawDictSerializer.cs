@@ -27,9 +27,9 @@ public class RawDictSerializer : IHtmlSerializer
             .SelectMany(a => new IHtmlElement[]
             {
                 new Dt(a.Name),
-                new Dd {Subs = fac.Serialize(a.Val, lvl - 1, fac).ToArray()}
+                new Dd {Subs = fac.Serialize(a.Val, lvl - 1, fac).ToList()}
             })
-            .ToArray();
+            .ToList();
         return new Ul
         {
             Subs = subs,

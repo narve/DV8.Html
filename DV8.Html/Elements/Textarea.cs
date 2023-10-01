@@ -9,13 +9,7 @@ public class Textarea : HtmlElement, IFormElement
 
     [Attr]
     public string Name { get; set; }
-
-    public object Value
-    {
-        get { return Text; }
-        set { Text = value?.ToString(); }
-    }
-
+    
     [Attr]
     public bool Required { get; set; }
 

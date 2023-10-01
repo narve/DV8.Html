@@ -2,8 +2,5 @@
 
 public class Legend: HtmlElement
 {
-    public Legend(string n)
-    {
-        Text = n;
-    }
+    public Legend(string n) => AddIfNotEmpty(n);
 }

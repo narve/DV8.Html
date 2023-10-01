@@ -2,8 +2,9 @@
 
 public class Span : HtmlElement
 {
-    public Span(string s)
+    public Span()
     {
-        Text = s; 
     }
+
+    public Span(string s) => AddIfNotEmpty(s);
 }

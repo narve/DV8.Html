@@ -9,12 +9,10 @@ public class Section : HtmlElement
     {
     }
 
-    public Section(IEnumerable<IHtmlElement> subs)
+    public Section(IEnumerable<IHtmlElement> subs) : base(subs)
     {
-        Subs = subs.ToArray();
     }
-    public Section(params IHtmlElement[]subs)
+    public Section(params IHtmlElement[]subs): base(subs)
     {
-        Subs = subs.ToArray();
     }
 }

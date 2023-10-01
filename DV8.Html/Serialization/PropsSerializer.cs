@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using DV8.Html.Elements;
+using DV8.Html.Mutators;
 using DV8.Html.Support;
 using DV8.Html.Utils;
 
@@ -30,11 +31,7 @@ public class PropsSerializer : IHtmlSerializer
             subs.AddRange(new IHtmlElement[]
             {
                 new Dt("Type"),
-                new Dd
-                {
-                    Title = itemType,
-                    Text = x.GetType().Name,
-                },
+                new Dd(x.GetType().Name).WithTitle(itemType)
             });
         }
 
@@ -44,13 +41,13 @@ public class PropsSerializer : IHtmlSerializer
             .SelectMany(a => new IHtmlElement[]
             {
                 new Dt(a.Name),
-                new Dd {Itemprop = PropName(a.Name), Subs = fac.Serialize(a.Val, lvl - 1, fac).ToArray()}
+                new Dd {Itemprop = PropName(a.Name), Subs = fac.Serialize(a.Val, lvl - 1, fac).ToList()}
             })
             .ToList().ForEach(e => subs.Add(e));
 
         return new Dl
         {
-            Subs = subs.ToArray(),
+            Subs = subs.ToList(),
             Itemscope = true,
             Itemtype = itemType,
         }.ToArray();

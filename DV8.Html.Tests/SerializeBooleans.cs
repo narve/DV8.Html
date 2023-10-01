@@ -9,7 +9,7 @@ public class SerializeBooleans
     public void Serializing_InputWithTrueBoolValues_ShouldWork()
     {
         // Arrange
-        var input = new Option {Selected = true};
+        Option input = new Option {Selected = true};
 
         // Act
         var s = input.ToHtml();

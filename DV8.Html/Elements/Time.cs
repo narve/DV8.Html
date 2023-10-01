@@ -7,6 +7,6 @@ public class Time : HtmlElement
     public Time(string isoVersion, string textVersion = null)
     {
         Datetime = isoVersion;
-        Text = textVersion ?? isoVersion;
+        AddIfNotEmpty(textVersion ?? isoVersion);
     }
 }

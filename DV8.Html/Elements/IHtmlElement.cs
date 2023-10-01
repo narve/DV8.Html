@@ -1,4 +1,6 @@
-﻿namespace DV8.Html.Elements;
+﻿using System.Collections.Generic;
+
+namespace DV8.Html.Elements;
 
 public interface IHtmlElement : IHtmlSerializable
 {
@@ -11,10 +13,7 @@ public interface IHtmlElement : IHtmlSerializable
     [Attr("class")]
     string Clz { get; set; }
 
-    string Text { get; set; }
-
-    string ToHtml();
-    IHtmlElement[] Subs { get; set; }
+    List<IHtmlElement> Subs { get; set; }
 
     string Tag { get; }
 

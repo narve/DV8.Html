@@ -9,8 +9,8 @@ public class Dl: HtmlElement
     {
     }
 
-    public Dl(IEnumerable<IHtmlElement> enumerable)
+    public Dl(IEnumerable<IHtmlElement> subs)
     {
-        Subs = enumerable.ToArray();
+        Subs.AddRange(subs);
     }
 }

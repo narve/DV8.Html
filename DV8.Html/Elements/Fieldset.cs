@@ -13,10 +13,13 @@ public class Fieldset : HtmlElement
     {
     }
 
-    public Fieldset(string legend, IEnumerable<IHtmlElement> subs = null)
+    public Fieldset(string legend = null, IEnumerable<IHtmlElement> subs = null)
     {
         Name = legend;
-        Subs = (subs ?? new IHtmlElement[0]).With(new Legend(legend)).ToArray();
+        if(subs!=null)
+            Subs.AddRange(subs);
+        else if(!string.IsNullOrEmpty(legend))
+            Subs.Add(new Legend(legend));
     }
 
 }

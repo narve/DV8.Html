@@ -1,4 +1,6 @@
-﻿namespace DV8.Html.Elements;
+﻿using System.Collections.Generic;
+
+namespace DV8.Html.Elements;
 
 public class Label : HtmlElement
 {
@@ -6,19 +8,16 @@ public class Label : HtmlElement
     {
     }
 
-    public Label(string txt) => 
-        Text = txt;
+    public Label(string txt) => AddIfNotEmpty(txt); 
 
     [Attr]
     public string For { get; set; }
 
-    public static HtmlElement Wrap(string v, IHtmlElement elem)
-    {
-        return new Label
+    public static HtmlElement Wrap(string v, IHtmlElement elem) =>
+        new Label
         {
-            Subs = new[] {new Span(v + ": "), elem},
+            Subs = new List<IHtmlElement> { new Span(v + ": "), elem },
             Clz = "label-for-" + elem.Id,
             For = elem.Id,
         };
-    }
 }

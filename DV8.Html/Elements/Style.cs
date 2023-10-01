@@ -2,9 +2,9 @@
 
 public class Style: HtmlElement
 {
-    public Style(string content)
+    public Style(string unsafeContent)
     {
-        this.Text = content;
+        AddIfNotEmpty(unsafeContent);
     }
         
 }

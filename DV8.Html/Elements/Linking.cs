@@ -13,4 +13,6 @@ public abstract class Linking : HtmlElement
     public bool Disabled { get; set; }
 
     public abstract A ToAnchor(string _href = null);
+    
+    
 }

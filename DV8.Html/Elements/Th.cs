@@ -6,8 +6,5 @@ public class Th : HtmlElement
     {
     }
 
-    public Th(string r)
-    {
-        Text = r;
-    }
+    public Th(string r) => AddIfNotEmpty(r);
 }

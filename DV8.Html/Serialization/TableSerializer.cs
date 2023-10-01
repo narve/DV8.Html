@@ -4,10 +4,11 @@ using System.Linq;
 using System.Reflection;
 using DV8.Html.Elements;
 using DV8.Html.Support;
+using static DV8.Html.Prefixes.Underscore;
 
 namespace DV8.Html.Serialization;
 
-public class TableSerializer: IHtmlSerializer
+public class TableSerializer : IHtmlSerializer
 {
     private readonly MemberInfo[] _props;
     private readonly HtmlSerializerRegistry _rootSerializer;
@@ -25,34 +26,23 @@ public class TableSerializer: IHtmlSerializer
 
     public IEnumerable<IHtmlElement> Serialize(object o, int lvl, IHtmlSerializer fac)
     {
-        yield return SerializeToTable( (IEnumerable)o);
+        yield return SerializeToTable((IEnumerable)o);
     }
 
-    public HtmlElement SerializeToTable(IEnumerable list)
-    {
-        return new Table
-        {
-            Subs = new IHtmlElement[]
-            {
-                new Thead
-                {
-                    Subs = _props.Select(p => new Th(p.Name)).Cast<IHtmlElement>().ToArray()
-                },
-                new Tbody
-                {
-                    Subs = list.Cast<object>().Select(item => SerializeToRow(_props, item)).ToArray()
-                },
-            }
-        };
-    }
+    public HtmlElement SerializeToTable(IEnumerable list) =>
+        _<Table>(
+            _<Thead>(
+                _props.Select(p => new Th(p.Name))
+            ),
+            _<Tbody>(
+                list.Cast<object>().Select(item => SerializeToRow(_props, item))
+            )
+        );
 
-    public IHtmlElement SerializeToRow(IEnumerable<MemberInfo> props, object item)
-    {
-        return new Tr
-        {
-            Subs = props.Select(prop => SerializeToTd(prop, item)).Cast<IHtmlElement>().ToArray()
-        };
-    }
+    public IHtmlElement SerializeToRow(IEnumerable<MemberInfo> props, object item) =>
+        _<Tr>(
+            props.Select(prop => SerializeToTd(prop, item))
+        );
 
     public Td SerializeToTd(MemberInfo prop, object item)
     {
@@ -61,8 +51,8 @@ public class TableSerializer: IHtmlSerializer
         {
             val = (val as List<Linking>).OfType<A>().ToList();
         }
-        var element = _rootSerializer.Serialize(val, 2, _rootSerializer);
-        return element != null ? new Td {Subs = element.ToArray()} : new Td(val?.ToString());
-    }
 
+        var element = _rootSerializer.Serialize(val, 2, _rootSerializer);
+        return element != null ? new Td { Subs = element.ToList() } : new Td(val?.ToString());
+    }
 }

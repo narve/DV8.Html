@@ -42,8 +42,9 @@ public class Form : Linking//, ISelf
         {
             rel = rel,
             Href = GetHrefWithArgs(baseRef?? BaseSelfUrl) ?? Action,
-            Text = Text ?? Name ?? Action ?? IANARels.EditForm,
-            Disabled = Disabled
+            // Text = Text ?? Name ?? Action ?? IANARels.EditForm,
+            Disabled = Disabled, 
+            Subs = Subs,
         };
     }
 

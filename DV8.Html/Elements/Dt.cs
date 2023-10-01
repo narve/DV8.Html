@@ -2,8 +2,9 @@
 
 public class Dt : HtmlElement
 {
-    public Dt(string name)
+    public Dt()
     {
-        Text = name;
     }
+
+    public Dt(object text) => AddIfNotEmpty(text);
 }

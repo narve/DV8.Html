@@ -1,8 +1,11 @@
-﻿using System;
+﻿#nullable enable
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Xml;
+using DV8.Html.Mutators;
 
 // ReSharper disable CollectionNeverUpdated.Global
 
@@ -28,97 +31,119 @@ public class HtmlElement : IHtmlElement
 
     public string Tag { get; }
 
-    public string Text { get; set; }
-
     public IDictionary<string, string> ExAttributes = new Dictionary<string, string>();
 
 
-    public IHtmlElement[] Subs { get; set; } = Array.Empty<IHtmlElement>();
+    public List<IHtmlElement> Subs { get; set; } = new();
 
     public HtmlElement()
     {
         Tag = GetTag();
     }
 
+    public HtmlElement(IEnumerable<IHtmlElement> htmlElements)
+    {
+        Tag = GetTag();
+        Subs.AddRange(htmlElements);
+    }
+
+    protected void AddIfNotEmpty(object txt)
+    {
+        if (txt != null)
+        {
+            var s = txt.ToString();
+            if (!string.IsNullOrEmpty(s))
+                Subs.Add(new TextContent(txt.ToString()));
+        }
+    }
+
     public HtmlElement(string tagName, string txt = null)
     {
         Tag = tagName;
-        Text = txt;
+        AddIfNotEmpty(txt);
     }
 
     public string GetTag()
         => Tag?.ToLower() ?? GetType().Name.ToLower();
 
-    public IHtmlElement[] ToArray() => new IHtmlElement[] {this};
+    public IHtmlElement[] ToArray() => new IHtmlElement[] { this };
 
-    public virtual string ToHtml()
+    public virtual void WriteHtml(XmlWriter writer)
     {
-        var writer = new StringWriter();
-        writer.Write("<");
-        writer.Write(GetTag());
+        writer.WriteStartElement(GetTag());
+        WriteAttributes(writer);
+        foreach (var o in Subs ?? new())
+        {
+            o.WriteHtml(writer);
+        }
+        //
+        // foreach (var pi in GetType().GetProperties())
+        // {
+        //     if (!Attribute.IsDefined(pi, typeof(Attr)) && !pi.Name.Equals(nameof(Subs)) &&
+        //         // !pi.Name.Equals(nameof(Text)) &&
+        //         !pi.Name.Equals(nameof(Tag))
+        //        )
+        //     {
+        //         if (pi.GetValue(this) is HtmlElement val)
+        //         {
+        //             // writer.WriteLine(val.ToHtml());
+        //             val.WriteHtml(writer);
+        //         }
+        //     }
+        // }
+        //
+        writer.WriteEndElement();
+        writer.Flush();
+    }
 
+    private void WriteAttributes(XmlWriter writer)
+    {
         foreach (var pi in DefinedAttributes().Where(AttributeHasValue))
         {
-            var val = pi.GetValue(this);
-            var a = (Attr) pi.GetCustomAttribute(typeof(Attr));
+            var a = (Attr)pi.GetCustomAttribute(typeof(Attr))!;
             var attrName = a.name ?? pi.Name.ToLower();
-            WriteAttribute(writer, attrName, val);
+            var val =
+                pi.PropertyType == typeof(bool) ? attrName : pi.GetValue(this)!;
+            // writer.WriteStartAttribute(attrName);
+            writer.WriteAttributeString(attrName, val.ToString());
+            // writer.WriteEndAttribute();
+            // WriteAttribute(writer, attrName, val);
         }
 
         foreach (var (key, value) in ExAttributes ?? new Dictionary<string, string>())
         {
-            WriteAttribute(writer, key, value);
+            writer.WriteAttributeString(key, value);
+            // WriteAttribute(writer, key, value);
         }
-
-        writer.WriteLine(">");
-
-        writer.Write(Text);
-        foreach (var o in Subs ?? Array.Empty<IHtmlElement>())
-        {
-            writer.WriteLine(o?.ToHtml() ?? "");
-            writer.WriteLine();
-        }
-
-        foreach (var pi in GetType().GetProperties())
-        {
-            if (!Attribute.IsDefined(pi, typeof(Attr)) && !pi.Name.Equals(nameof(Subs)) &&
-                !pi.Name.Equals(nameof(Text)) &&
-                !pi.Name.Equals(nameof(Tag))
-               )
-            {
-                if (pi.GetValue(this) is HtmlElement val)
-                    writer.WriteLine(val.ToHtml());
-            }
-        }
-
-        writer.Write("</");
-        writer.Write(GetTag());
-        writer.WriteLine(">");
-        return writer.ToString();
     }
+    //
+    // public static void WriteAttribute(TextWriter writer, string attrName, object val)
+    // {
+    //     writer.Write(" ");
+    //
+    //     if (val is bool b && b)
+    //     {
+    //         writer.Write(attrName);
+    //         writer.Write("='");
+    //         writer.Write(attrName);
+    //         writer.Write('\'');
+    //     }
+    //     else
+    //     {
+    //         writer.Write(attrName);
+    //         writer.Write("='");
+    //         writer.Write(val);
+    //         writer.Write('\'');
+    //     }
+    //
+    //     writer.Flush();
+    // }
 
-    public static void WriteAttribute(TextWriter writer, string attrName, object val)
+    public bool AttributeHasValue(PropertyInfo pi)
     {
-        writer.Write(" ");
-
-        if (val is bool b && b)
-        {
-            writer.Write(attrName);
-            writer.Write("='");
-            writer.Write(attrName);
-            writer.Write('\'');
-        }
-        else
-        {
-            writer.Write(attrName);
-            writer.Write("='");
-            writer.Write(val);
-            writer.Write('\'');
-        }
+        var value = pi.GetValue(this);
+        return value != null && (pi.PropertyType != typeof(bool) || (bool)value!);
     }
-
-    public bool AttributeHasValue(PropertyInfo pi) =>
-        pi.GetValue(this) != null && (pi.PropertyType != typeof(bool) || (bool) pi.GetValue(this));
 
     public IEnumerable<PropertyInfo> DefinedAttributes() =>
         GetType().GetProperties().Where(pi => Attribute.IsDefined(pi, typeof(Attr)));
@@ -126,4 +151,20 @@ public class HtmlElement : IHtmlElement
     public override string ToString() => Tag;
 
     public IEnumerable<IHtmlElement> Serialize(int lvl, IHtmlSerializer fac) => ToArray();
+
+    public string ToHtml()
+    {
+        using var writer = new StringWriter();
+        // writer.Write("hei");
+        var settings = new XmlWriterSettings
+        {
+            Indent = true,
+            IndentChars = "  ",
+            ConformanceLevel = ConformanceLevel.Auto,
+        };
+        using var xml = XmlWriter.Create(writer, settings);
+        WriteHtml(xml);
+        // writer.Write("hadet");
+        return writer.ToString();
+    }
 }

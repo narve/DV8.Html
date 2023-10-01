@@ -3,6 +3,7 @@ using System.Linq;
 using DV8.Html.Elements;
 using DV8.Html.Support;
 using DV8.Html.Utils;
+using static DV8.Html.Prefixes.Underscore;
 
 namespace DV8.Html.Serialization;
 
@@ -22,14 +23,14 @@ public class GenDictSerializer : IHtmlSerializer
 //                    .Where(a => a.Val != null)
             .SelectMany(a => new IHtmlElement[]
             {
-                new Dt(a.Name),
+                _<Dt>(a.Name),
                 new Dd
                 {
                     Itemprop = a.Name,
-                    Subs = fac.Serialize(a.Val, lvl - 1, fac).ToArray()
+                    Subs = fac.Serialize(a.Val, lvl - 1, fac).ToList()
                 }
             })
-            .ToArray();
+            .ToList();
         return new Ul
         {
             Subs = subs,

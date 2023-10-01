@@ -36,6 +36,6 @@ public class UnderscoreTests
 This will <em>not</em> be escaped
 </body></html>";
         
-        Assert.AreEqual(exp.StringLineBreaks(), act.StringLineBreaks());
+        Assert.AreEqual(exp.Canonical(), act.Canonical());
     }
 }

@@ -6,8 +6,5 @@ public class Dd : HtmlElement
     {
     }
 
-    public Dd(object v)
-    {
-        Text = v?.ToString() ?? "";
-    }
+    public Dd(object text) => AddIfNotEmpty(text);
 }

@@ -16,7 +16,8 @@ public class Option : HtmlElement
     public Option(string value, string text = null)
     {
         Value = value;
-        Text = text ?? value;
+        AddIfNotEmpty(text??value);
+        // Text = text ?? value;
     }
 
     public Option WithSelected(bool selected)

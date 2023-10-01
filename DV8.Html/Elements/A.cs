@@ -1,4 +1,5 @@
 ﻿using System;
+using DV8.Html.Mutators;
 
 namespace DV8.Html.Elements;
 
@@ -12,12 +13,12 @@ public class A : Linking
     public virtual Linking Disable(bool b = true)
     {
         Disabled = b;
-        if (b)
-        {
-            Array.ForEach(Subs, s => s.Text += " [DISABLED]");
+        // if (b)
+        // {
+            // Subs.ForEach(s => s.Text += " [DISABLED]");
 //                Subs.ForEach(s => s.Text += " [DISABLED]");
-            Text += "[DISABLED]";
-        }
+            // Text += "[DISABLED]";
+        // }
         return this;
     }
 
@@ -28,8 +29,10 @@ public class A : Linking
 
     public override string ToString()
     {
-        if (Text == null) Text = "" + rel;
-        return base.ToString();
+        // if (Text == null) Text = "" + rel;
+        // return base.ToString();
+        var s = (IHtmlSerializable)this;
+        return s.ToHtml();
     }
 
     public A()
@@ -39,30 +42,8 @@ public class A : Linking
     public A(string href, string text = null, string rel = null)
     {
         Href = href;
-        Text = text ?? Href;
         this.rel = rel;
+        AddIfNotEmpty(text ?? href);
     }
 
-    public A With(Action<A> mutator)
-    {
-        mutator(this);
-        return this;
-    }
-
-
-    public A WithText(string text) => With(a => a.Text = text);
-
-    public A WithClz(string clz) => With(a => a.Clz = clz);
-
-    public A WithRel(string newRel) => With(a => a.rel = newRel);
-
-    public A WithId(string newId) => With(a => a.Id = newId);
-
-    public A WithTitle(string x) => With(a => a.Title = x);
-
-    public A AddClz(string clz) => WithClz(Clz + " " + clz);
-
-    public A AddRel(string newRel) => WithRel(rel + " " + newRel);
-
-    public A WithHref(string s) => With(a => a.Href = s);
 }

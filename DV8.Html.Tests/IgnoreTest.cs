@@ -25,14 +25,14 @@ public class IgnoreTest
         };
         var ser = HtmlSerializerRegistry.AddDefaults(new HtmlSerializerRegistry());
         var serialized = string.Join("", ser.Serialize(obj, 3).Select(x => x.ToHtml()).ToArray())
-            .StringLineBreaks();
+            .Canonical();
 
         var exp = @"
 <dl itemscope='itemscope' itemtype='http://dv8.no/MyClass'>
 <dt>Type</dt><dd title='http://dv8.no/MyClass'>MyClass</dd>
 <dt>MyIncludedProperty</dt><dd itemprop='myIncludedProperty'><span>Hello, World!</span></dd>
 </dl>"
-            .StringLineBreaks();
+            .Canonical();
         Assert.AreEqual(exp, serialized);
     }
 }

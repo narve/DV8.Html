@@ -9,8 +9,5 @@ public class Td : HtmlElement
     {
     }
 
-    public Td(string t)
-    {
-        Text = t;
-    }
+    public Td(object text) => AddIfNotEmpty(text);
 }

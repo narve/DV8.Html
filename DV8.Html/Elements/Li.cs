@@ -8,12 +8,7 @@ public class Li : HtmlElement
     {
     }
 
-    public Li(IHtmlElement sub)
-    {
-        Subs = sub.ToArray();
-    }
-    public Li(string t)
-    {
-        Text = t;
-    }
+    public Li(IHtmlElement sub) => Subs.Add(sub);
+
+    public Li(string t) => AddIfNotEmpty(t);
 }

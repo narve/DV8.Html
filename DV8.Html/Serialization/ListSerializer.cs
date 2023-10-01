@@ -52,7 +52,7 @@ public class ListSerializer : IHtmlSerializer
                 .SelectMany(item => fac.Serialize(item, lvl - 1, fac))
                 .Select(elem => new Li(elem))
                 .OfType<IHtmlElement>()
-                .ToArray(),
+                .ToList(),
         }.ToArray();
     }
 }
