@@ -1,7 +1,7 @@
 DV8.Html
 ========
 
-HTML Elements and Html Serializer
+C# package with a HTML DSL and support for generating HTML elements and serializing object graphs to HTML
 
 This project is a dead simple and dependency free package to work with HTML elements from C# code. 
 
@@ -9,6 +9,8 @@ In addition, there is support for serializing objects and graphs of objects to H
 
 Lots of elements and attributes are implemented, and you can generate missing elements/attributes at 
 run time by specifying element/attribute names.  
+
+Writing out non-standard / non-safe HTML code is also supported.
 
 Various helper methods are available to make it easy to work with attributes and elements.
 
@@ -44,7 +46,8 @@ Example code for generating HTML:
         This will not be <b>escaped</b>
         </body></html>";
 
-        Assert.AreEqual(exp.StringLineBreaks(), act).StringLineBreaks();
+        // "Canonical" strips linebreaks, whitespace between elements, and uses ' instead of " as attribute delimiter.
+        Assert.AreEqual(exp.Canonical(), act).Canonical();
 
 
 
@@ -68,4 +71,5 @@ as straight, human-readable HTML.
 
 
 In the very unlikely event that anybody actually is interested in this project: 
-Let me know (starring it on github is enough) and I'll improve documentation and samples :) 
+Let me know (starring it on github is enough) and I'll improve documentation and samples :)
+Issues and pull requests are also welcome.

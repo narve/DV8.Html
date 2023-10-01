@@ -1,18 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <PackageDescription>C# package for generating HTML elements and serializing objects to HTML</PackageDescription>
+        <PackageDescription>C# package with a HTML DSL and support for generating HTML elements and serializing object graphs to HTML</PackageDescription>
         <RootNamespace>DV8.Html</RootNamespace>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>2.0</PackageVersion>
+        <PackageVersion>2.1</PackageVersion>
         <TargetFrameworks>net6.0;netcoreapp3.1</TargetFrameworks>
         <LangVersion>10</LangVersion>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <RepositoryUrl>https://github.com/narve/DV8.Html</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageProjectUrl>https://github.com/narve/DV8.Html</PackageProjectUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageLicenseFile>License.txt</PackageLicenseFile>
     </PropertyGroup>
     <ItemGroup>
         <None Include="../README.md" Pack="true" PackagePath="/"/>
+        <None Include="../License.txt" Pack="true" PackagePath=""/>
     </ItemGroup>
 </Project>
