@@ -1,5 +1,6 @@
 using System.Linq;
 using DV8.Html.Elements;
+using DV8.Html.Utils;
 using NUnit.Framework;
 using E = DV8.Html.Elements;
 using static DV8.Html.Prefixes.Underscore;
@@ -28,6 +29,9 @@ public class UnderscoreTests
                     _UNSAFE("This will <em>not</em> be escaped") // Allows any HTML, don't use this with untrusted content. 
                 )
             );
+
+        var title = html.Subs.OfTypeRecur<Title>().Single();
+        
         var act = html.ToHtml();
         var exp = @"
 <!DOCTYPE html><html>

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Xml;
+using DV8.Html.Serialization;
 
-namespace DV8.Html.Elements;
+namespace DV8.Html.Framework;
 
 public interface IHtmlElement : IHtmlSerializable
 {
@@ -18,4 +20,8 @@ public interface IHtmlElement : IHtmlSerializable
     string Tag { get; }
 
     string Title { get; set; }
+
+    public string ToHtml();
+
+    void WriteHtml(XmlWriter writer);
 }

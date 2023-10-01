@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using DV8.Html.Elements;
+using DV8.Html.Framework;
 using DV8.Html.Mutators;
 using DV8.Html.Support;
 using DV8.Html.Utils;

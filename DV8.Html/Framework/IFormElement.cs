@@ -1,4 +1,4 @@
-﻿namespace DV8.Html.Elements;
+﻿namespace DV8.Html.Framework;
 
 public interface IFormElement: IHtmlElement
 {

@@ -1,4 +1,6 @@
-﻿namespace DV8.Html.Elements;
+﻿using DV8.Html.Framework;
+
+namespace DV8.Html.Elements;
 
 public class Span : HtmlElement
 {
@@ -6,5 +8,7 @@ public class Span : HtmlElement
     {
     }
 
-    public Span(string s) => AddIfNotEmpty(s);
+    public Span(string s) : base(null, s)
+    {
+    }
 }

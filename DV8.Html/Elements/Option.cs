@@ -1,4 +1,6 @@
-﻿namespace DV8.Html.Elements;
+﻿using DV8.Html.Framework;
+
+namespace DV8.Html.Elements;
 
 public class Option : HtmlElement
 {
@@ -13,12 +15,8 @@ public class Option : HtmlElement
     {
     }
 
-    public Option(string value, string text = null)
-    {
+    public Option(string value, string text = null): base(null, text) => 
         Value = value;
-        AddIfNotEmpty(text??value);
-        // Text = text ?? value;
-    }
 
     public Option WithSelected(bool selected)
     {

@@ -1,6 +1,10 @@
-﻿namespace DV8.Html.Elements;
+﻿using DV8.Html.Framework;
+
+namespace DV8.Html.Elements;
 
 public class Pre : HtmlElement
 {
-    public Pre(string s) => AddIfNotEmpty(s);
+    public Pre(string s) : base(null, s)
+    {
+    }
 }

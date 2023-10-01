@@ -1,11 +1,13 @@
-using System.Collections.Generic;
-using System.Web;
 using System.Xml;
+using DV8.Html.Framework;
 
 namespace DV8.Html.Elements;
 
 public class UnsafeTextContent : HtmlElement
 {
+    /// <summary>
+    /// Gets or sets a text that will NOT be encoded when serializing
+    /// </summary>
     public string Text { get; set; }
 
     public UnsafeTextContent()

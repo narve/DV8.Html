@@ -5,29 +5,30 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Xml;
-using DV8.Html.Mutators;
+using DV8.Html.Elements;
+using DV8.Html.Serialization;
 
 // ReSharper disable CollectionNeverUpdated.Global
 
 // ReSharper disable ArrangeRedundantParentheses
 
-namespace DV8.Html.Elements;
+namespace DV8.Html.Framework;
 
 public class HtmlElement : IHtmlElement
 {
-    [Attr] public string Id { get; set; }
+    [Attr] public string? Id { get; set; }
 
-    [Attr] public string Style { get; set; }
+    [Attr] public string? Style { get; set; }
 
-    [Attr] public string Title { get; set; }
+    [Attr] public string? Title { get; set; }
 
-    [Attr("class")] public string Clz { get; set; }
+    [Attr("class")] public string? Clz { get; set; }
 
     [Attr] public bool Itemscope { get; set; }
 
-    [Attr] public string Itemtype { get; set; }
+    [Attr] public string? Itemtype { get; set; }
 
-    [Attr] public string Itemprop { get; set; }
+    [Attr] public string? Itemprop { get; set; }
 
     public string Tag { get; }
 
@@ -47,7 +48,19 @@ public class HtmlElement : IHtmlElement
         Subs.AddRange(htmlElements);
     }
 
-    protected void AddIfNotEmpty(object txt)
+    /// <summary>
+    /// Creates a new HtmlElement with the given tag name and optional text content.
+    /// </summary>
+    /// <param name="tagName">defaults to the lower case name of the class</param>
+    /// <param name="txt"></param>
+    public HtmlElement(string? tagName = null, string? txt = null)
+    {
+        Tag = tagName ?? GetTag();
+        AddIfNotEmpty(txt);
+    }
+
+
+    protected void AddIfNotEmpty(object? txt)
     {
         if (txt != null)
         {
@@ -56,16 +69,10 @@ public class HtmlElement : IHtmlElement
                 Subs.Add(new TextContent(txt.ToString()));
         }
     }
-
-    public HtmlElement(string tagName, string txt = null)
-    {
-        Tag = tagName;
-        AddIfNotEmpty(txt);
-    }
-
+    
     public string GetTag()
         => Tag?.ToLower() ?? GetType().Name.ToLower();
-
+    
     public IHtmlElement[] ToArray() => new IHtmlElement[] { this };
 
     public virtual void WriteHtml(XmlWriter writer)

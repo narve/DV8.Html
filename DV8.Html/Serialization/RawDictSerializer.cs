@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DV8.Html.Elements;
+using DV8.Html.Framework;
 using DV8.Html.Support;
 using DV8.Html.Utils;
 

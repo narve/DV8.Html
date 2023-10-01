@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using DV8.Html.Framework;
 using DV8.Html.Utils;
 
 // ReSharper disable InconsistentNaming

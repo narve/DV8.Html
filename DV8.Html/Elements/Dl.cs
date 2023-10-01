@@ -1,16 +1,19 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using DV8.Html.Framework;
 
 namespace DV8.Html.Elements;
 
-public class Dl: HtmlElement
+public class Dl : HtmlElement
 {
     public Dl()
     {
     }
 
-    public Dl(IEnumerable<IHtmlElement> subs)
+    public Dl(IEnumerable<IHtmlElement> subs) : base(subs)
     {
-        Subs.AddRange(subs);
+    }
+
+    public Dl(params IHtmlElement[] subs) : base(subs)
+    {
     }
 }

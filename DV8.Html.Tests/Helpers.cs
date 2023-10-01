@@ -16,6 +16,10 @@ public static class Helpers
         var indentPattern = ">(\\s+)<";
         s = Regex.Replace(s, indentPattern, "><");
         
+        // Replace spaces before end-of-element: 
+        var endPattern = @" +\/\>";
+        s = Regex.Replace(s, endPattern, "/>");
+        
         return s.Replace("\r", "")
             .Replace("\n", "");
     }

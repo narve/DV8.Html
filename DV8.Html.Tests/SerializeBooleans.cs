@@ -6,6 +6,33 @@ namespace DV8.Html.Tests;
 public class SerializeBooleans
 {
     [Test]
+    public void BooleanAttributesShouldNotBeIncludedIfFalse()
+    {
+        // Arrange
+        var input = new Input {Disabled = false};
+
+        // Act
+        var s = input.ToHtml();
+
+        // Assert
+        Assert.AreEqual("<input type='text'/>", s.Canonical());
+        StringAssert.DoesNotContain( "disabled", s);
+    }
+
+    [Test]
+    public void BooleanAttributesShouldUseAttributeNameAsValueNotBeIncludedIfTrue()
+    {
+        // Arrange
+        var input = new Input {Disabled = true};
+
+        // Act
+        var s = input.ToHtml();
+
+        // Assert
+        Assert.AreEqual("<input disabled='disabled' type='text'/>", s.Canonical());
+    }
+    
+    [Test]
     public void Serializing_InputWithTrueBoolValues_ShouldWork()
     {
         // Arrange

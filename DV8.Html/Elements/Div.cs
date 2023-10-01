@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using DV8.Html.Framework;
 
 namespace DV8.Html.Elements;
 
@@ -9,12 +9,11 @@ public class Div : HtmlElement
     {
     }
 
-    public Div(IEnumerable<IHtmlElement> subs)
+    public Div(IEnumerable<IHtmlElement> subs) : base(subs)
     {
-        Subs.AddRange(subs);
     }
-    public Div(params IHtmlElement[]subs)
+
+    public Div(params IHtmlElement[]subs) : base(subs)
     {
-        Subs.AddRange(subs);
     }
 }

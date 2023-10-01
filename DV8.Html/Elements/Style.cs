@@ -1,10 +1,16 @@
-﻿namespace DV8.Html.Elements;
+﻿using DV8.Html.Framework;
 
-public class Style: HtmlElement
+namespace DV8.Html.Elements;
+
+public class Style : HtmlElement
 {
+    /// <summary>
+    /// NB this content does not escape unsafe content
+    /// </summary>
+    /// <param name="unsafeContent"></param>
     public Style(string unsafeContent)
     {
-        AddIfNotEmpty(unsafeContent);
+        if (!string.IsNullOrEmpty(unsafeContent))
+            Subs.Add(new UnsafeTextContent(unsafeContent.ToString()));
     }
-        
 }

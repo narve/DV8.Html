@@ -1,4 +1,6 @@
-﻿namespace DV8.Html.Elements;
+﻿using DV8.Html.Framework;
+
+namespace DV8.Html.Elements;
 
 public class Input : HtmlElement, IFormElement
 {
@@ -15,7 +17,7 @@ public class Input : HtmlElement, IFormElement
     /// Seconds (for time at least)
     /// </summary>
     [Attr]
-    public int Step { get; set; }
+    public int? Step { get; set; }
 
     [Attr]
     public string PlaceHolder { get; set; }

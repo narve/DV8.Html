@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using DV8.Html.Accessors;
 using DV8.Html.Elements;
+using DV8.Html.Framework;
 using DV8.Html.Serialization;
-using DV8.Html.Utils;
 using NUnit.Framework;
 using static NUnit.Framework.Assert;
 

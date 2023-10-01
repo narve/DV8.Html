@@ -1,4 +1,6 @@
-﻿namespace DV8.Html.Elements;
+﻿using DV8.Html.Framework;
+
+namespace DV8.Html.Elements;
 
 public class Th : HtmlElement
 {
@@ -6,5 +8,7 @@ public class Th : HtmlElement
     {
     }
 
-    public Th(string r) => AddIfNotEmpty(r);
+    public Th(string r) : base(null, r)
+    {
+    }
 }
