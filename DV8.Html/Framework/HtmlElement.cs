@@ -36,6 +36,17 @@ public class HtmlElement : IHtmlElement
 
     public IDictionary<string, string> ExAttributes = new Dictionary<string, string>();
 
+    public IHtmlElement Add(params IHtmlElement[] children)
+    {
+        Children.AddRange(children);
+        return this;
+    }
+
+    public IHtmlElement Add(IEnumerable<IHtmlElement> children)
+    {
+        Children.AddRange(children);
+        return this;
+    }
 
     public List<IHtmlElement> Children { get; set; } = new();
 
