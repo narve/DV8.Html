@@ -42,13 +42,13 @@ public class PropsSerializer : IHtmlSerializer
             .SelectMany(a => new IHtmlElement[]
             {
                 new Dt(a.Name),
-                new Dd {Itemprop = PropName(a.Name), Subs = fac.Serialize(a.Val, lvl - 1, fac).ToList()}
+                new Dd {Itemprop = PropName(a.Name), Children = fac.Serialize(a.Val, lvl - 1, fac).ToList()}
             })
             .ToList().ForEach(e => subs.Add(e));
 
         return new Dl
         {
-            Subs = subs.ToList(),
+            Children = subs.ToList(),
             Itemscope = true,
             Itemtype = itemType,
         }.ToArray();

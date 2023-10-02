@@ -38,7 +38,7 @@ public class PropsSerializerTests
         AreEqual(exp.Canonical(), xml.Canonical());
 
         AreEqual(1, elements.Length);
-        var subs = elements.Single().Subs;
+        var subs = elements.Single().Children;
         var dt = subs[0];
         var dd = subs[1];
         AreEqual("Type", dt.GetTextContent());
@@ -62,8 +62,8 @@ public class PropsSerializerTests
 
         // Assert
         AreEqual("ul", elements[0].Tag);
-        AreEqual("li", elements[0].Subs[0].Tag);
-        AreEqual("dl", elements[0].Subs[0].Subs[0].Tag);
+        AreEqual("li", elements[0].Children[0].Tag);
+        AreEqual("dl", elements[0].Children[0].Children[0].Tag);
     }
 
     [Test]

@@ -28,12 +28,12 @@ public class RawDictSerializer : IHtmlSerializer
             .SelectMany(a => new IHtmlElement[]
             {
                 new Dt(a.Name),
-                new Dd {Subs = fac.Serialize(a.Val, lvl - 1, fac).ToList()}
+                new Dd {Children = fac.Serialize(a.Val, lvl - 1, fac).ToList()}
             })
             .ToList();
         return new Ul
         {
-            Subs = subs,
+            Children = subs,
             Itemscope = true,
             Itemtype = itemtype,
         }.ToArray();

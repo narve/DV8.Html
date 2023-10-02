@@ -49,7 +49,7 @@ public class ListSerializer : IHtmlSerializer
             Clz = "result-list " + itemType,
             Itemscope = true,
             Itemtype = HtmlSupport.Itemtype(o),
-            Subs = ((IEnumerable<object>) o)
+            Children = ((IEnumerable<object>) o)
                 .SelectMany(item => fac.Serialize(item, lvl - 1, fac))
                 .Select(elem => new Li(elem))
                 .OfType<IHtmlElement>()

@@ -16,9 +16,9 @@ public class Fieldset : HtmlElement
     {
         Name = legend;
         if(subs!=null)
-            Subs.AddRange(subs);
+            Children.AddRange(subs);
         else if(!string.IsNullOrEmpty(legend))
-            Subs.Add(new Legend(legend));
+            Children.Add(new Legend(legend));
     }
 
 }

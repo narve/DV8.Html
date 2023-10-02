@@ -20,6 +20,6 @@ public class Style : HtmlElement
     public Style(string unsafeContent)
     {
         if (!string.IsNullOrEmpty(unsafeContent))
-            Subs.Add(new UnsafeTextContent(unsafeContent));
+            Children.Add(new UnsafeTextContent(unsafeContent));
     }
 }

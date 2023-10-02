@@ -15,7 +15,7 @@ public interface IHtmlElement : IHtmlSerializable
     [Attr("class")]
     string Clz { get; set; }
 
-    List<IHtmlElement> Subs { get; set; }
+    List<IHtmlElement> Children { get; set; }
 
     string Tag { get; }
 
@@ -27,14 +27,14 @@ public interface IHtmlElement : IHtmlSerializable
     /// <returns>self</returns>
     public IHtmlElement Add(params IHtmlElement[] children)
     {
-        Subs.AddRange(children);
+        Children.AddRange(children);
         return this;
     }
 
     /// <returns>self</returns>
     public IHtmlElement Add(IEnumerable<IHtmlElement> children)
     {
-        Subs.AddRange(children);
+        Children.AddRange(children);
         return this;
     }
     

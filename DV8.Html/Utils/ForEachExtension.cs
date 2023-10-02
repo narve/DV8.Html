@@ -53,5 +53,5 @@ public static class ForEachExtension
         toAdd == null ? source : With(source, toAdd);
 
     public static IEnumerable<T> OfTypeRecur<T>(this IEnumerable<IHtmlElement> ea) where T : IHtmlElement =>
-        ea.SelectMany(e => e is T ? new[] {(T) e} : OfTypeRecur<T>(e.Subs)).ToArray();
+        ea.SelectMany(e => e is T ? new[] {(T) e} : OfTypeRecur<T>(e.Children)).ToArray();
 }

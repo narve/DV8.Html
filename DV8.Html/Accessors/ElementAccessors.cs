@@ -13,7 +13,7 @@ public static class ElementAccessors
         {
             TextContent tc => tc.Text,
             UnsafeTextContent utc => utc.Text,
-            IHtmlElement h => string.Join("", h.Subs.Select(sub => sub.GetTextContent())),
+            IHtmlElement h => string.Join("", h.Children.Select(sub => sub.GetTextContent())),
             _ => throw new ArgumentOutOfRangeException(nameof(e), e, null)
         };
 }

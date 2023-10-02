@@ -37,7 +37,7 @@ public class HtmlElement : IHtmlElement
     public IDictionary<string, string> ExAttributes = new Dictionary<string, string>();
 
 
-    public List<IHtmlElement> Subs { get; set; } = new();
+    public List<IHtmlElement> Children { get; set; } = new();
 
     public HtmlElement()
     {
@@ -47,7 +47,7 @@ public class HtmlElement : IHtmlElement
     public HtmlElement(IEnumerable<IHtmlElement> htmlElements)
     {
         Tag = GetTag();
-        Subs.AddRange(htmlElements);
+        Children.AddRange(htmlElements);
     }
 
     /// <summary>
@@ -68,7 +68,7 @@ public class HtmlElement : IHtmlElement
         {
             var s = txt.ToString();
             if (!string.IsNullOrEmpty(s))
-                Subs.Add(new TextContent(txt.ToString()));
+                Children.Add(new TextContent(txt.ToString()));
         }
     }
     
@@ -83,7 +83,7 @@ public class HtmlElement : IHtmlElement
         writer.WriteStartOfElement(GetTag());
         WriteAttributes(writer);
         writer.WriteEndOfElementTag();
-        foreach (var o in Subs ?? new())
+        foreach (var o in Children ?? new())
         {
             o.WriteHtml(writer);
         }
@@ -95,7 +95,7 @@ public class HtmlElement : IHtmlElement
     {
         writer.WriteStartElement(GetTag());
         WriteAttributes(writer);
-        foreach (var o in Subs ?? new())
+        foreach (var o in Children ?? new())
         {
             o.WriteXml(writer);
         }

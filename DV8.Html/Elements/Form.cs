@@ -27,7 +27,7 @@ public class Form : Linking//, ISelf
     public Linking Disable(bool b = true)
     {
         Disabled = b;
-        Subs.OfType<Input>().ForEach(s => s.Disable(b));
+        Children.OfType<Input>().ForEach(s => s.Disable(b));
         //subs.Select(s => (s is INPUT) ? (s as INPUT).Disabled(b) : s).ToList();
         return this;
     }
@@ -45,7 +45,7 @@ public class Form : Linking//, ISelf
             Href = GetHrefWithArgs(baseRef?? BaseSelfUrl) ?? Action,
             // Text = Text ?? Name ?? Action ?? IANARels.EditForm,
             Disabled = Disabled, 
-            Subs = Subs,
+            Children = Children,
         };
     }
 
@@ -58,17 +58,17 @@ public class Form : Linking//, ISelf
     public Dictionary<string, List<string>> BuildDict()
     {
         var dict = new Dictionary<string, List<string>>();
-        Subs?
+        Children?
             .OfTypeRecur<Input>()
             .Where(i => !string.IsNullOrEmpty(i.Name?.ToString()) && !string.IsNullOrEmpty(i.Value?.ToString()))
             .ForEach(i => dict[i.Name.ToString()] = new[] {i.Value.ToString()}.ToList());
-        Subs?
+        Children?
             .OfTypeRecur<Select>()
             .Where(i => !string.IsNullOrEmpty(i.Name?.ToString()))
             .Select(s => new
             {
                 name = s.Name,
-                value = string.Join(",", s.Subs.OfTypeRecur<Option>().Where(o => o.Selected).Select(o => o.Value).ToArray())
+                value = string.Join(",", s.Children.OfTypeRecur<Option>().Where(o => o.Selected).Select(o => o.Value).ToArray())
             })
             .ForEach(i => dict[i.name.ToString()] = new[] {i.value.ToString()}.ToList());
         if (Disabled)

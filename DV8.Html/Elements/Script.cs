@@ -20,6 +20,6 @@ public class Script : HtmlElement
     public Script(string txt)
     {
         if (!string.IsNullOrEmpty(txt))
-            Subs.Add(new UnsafeTextContent(txt));
+            Children.Add(new UnsafeTextContent(txt));
     }
 }

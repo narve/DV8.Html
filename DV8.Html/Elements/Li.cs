@@ -8,7 +8,7 @@ public class Li : HtmlElement
     {
     }
 
-    public Li(IHtmlElement sub) => Subs.Add(sub);
+    public Li(IHtmlElement sub) => Children.Add(sub);
 
     public Li(string t) : base(null, t)
     {

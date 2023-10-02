@@ -28,13 +28,13 @@ public class GenDictSerializer : IHtmlSerializer
                 new Dd
                 {
                     Itemprop = a.Name,
-                    Subs = fac.Serialize(a.Val, lvl - 1, fac).ToList()
+                    Children = fac.Serialize(a.Val, lvl - 1, fac).ToList()
                 }
             })
             .ToList();
         return new Ul
         {
-            Subs = subs,
+            Children = subs,
             Itemscope = true,
             Itemtype = itemtype,
         }.ToArray();

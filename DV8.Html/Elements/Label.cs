@@ -26,13 +26,13 @@ public class Label : HtmlElement
         // We want to add the text first, not after the html elements
         AddIfNotEmpty(txt);
         if(htmlElements != null)
-            Subs.AddRange(htmlElements);
+            Children.AddRange(htmlElements);
     }
 
     public static HtmlElement Wrap(string v, IHtmlElement elem) =>
         new Label
         {
-            Subs = new List<IHtmlElement> { new Span(v + ": "), elem },
+            Children = new List<IHtmlElement> { new Span(v + ": "), elem },
             Clz = "label-for-" + elem.Id,
             For = elem.Id,
         };

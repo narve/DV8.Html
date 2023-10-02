@@ -54,6 +54,6 @@ public class TableSerializer : IHtmlSerializer
         }
 
         var element = _rootSerializer.Serialize(val, 2, _rootSerializer);
-        return element != null ? new Td { Subs = element.ToList() } : new Td(val?.ToString());
+        return element != null ? new Td { Children = element.ToList() } : new Td(val?.ToString());
     }
 }

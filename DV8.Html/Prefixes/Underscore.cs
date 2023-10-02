@@ -12,32 +12,32 @@ public static class Underscore
     public static T _<T>(IHtmlElement child) where T : IHtmlElement, new() =>
         new()
         {
-            Subs = new List<IHtmlElement> { child }
+            Children = new List<IHtmlElement> { child }
         };
 
     public static T _<T>(params IHtmlElement[] children) where T : IHtmlElement, new() =>
         new()
         {
-            Subs = children.ToList()
+            Children = children.ToList()
         };
 
     public static T _<T>(List<IHtmlElement> children) where T : IHtmlElement, new() =>
         new()
         {
-            Subs = children
+            Children = children
         };
 
     public static T _<T>(IEnumerable<IHtmlElement> children) where T : IHtmlElement, new() =>
         new()
         {
-            Subs = children.ToList()
+            Children = children.ToList()
         };
 
     public static T _<T>(string text) where T : IHtmlElement, new()
     {
         var t = new T();
         if(!string.IsNullOrEmpty(text))
-            t.Subs.Add(new TextContent(text));
+            t.Children.Add(new TextContent(text));
         return t;
     }
 
