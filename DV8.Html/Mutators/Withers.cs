@@ -1,4 +1,5 @@
 using System;
+using System.Net.Http;
 using DV8.Html.Elements;
 using DV8.Html.Framework;
 
@@ -17,6 +18,9 @@ public static class Withers
 
     public static T WithName<T>(this T e, string name) where T: IFormElement
         => With(e, a => a.Name = name);
+    
+    public static Form WithMethod(this Form e, HttpMethod method)  
+        => With(e, a => a.Method = method);
     
     public static A WithHref(this A t, string s) => With(t, a => a.Href = s);
     public static A WithRel(this A t, string newRel) => With(t, a => a.rel = newRel);
