@@ -76,6 +76,7 @@ public class HtmlElement : IHtmlElement
         => Tag?.ToLower() ?? GetType().Name.ToLower();
     
     public IHtmlElement[] ToArray() => new IHtmlElement[] { this };
+    public List<IHtmlElement> ToList() => new() { this };
 
     public virtual void WriteHtml(HtmlWriter writer)
     {
