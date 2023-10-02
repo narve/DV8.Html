@@ -24,6 +24,20 @@ public interface IHtmlElement : IHtmlSerializable
     public string ToHtml();
     public string ToXml();
 
+    /// <returns>self</returns>
+    public IHtmlElement Add(params IHtmlElement[] children)
+    {
+        Subs.AddRange(children);
+        return this;
+    }
+
+    /// <returns>self</returns>
+    public IHtmlElement Add(IEnumerable<IHtmlElement> children)
+    {
+        Subs.AddRange(children);
+        return this;
+    }
+    
     void WriteXml(XmlWriter writer);
     void WriteHtml(HtmlWriter writer);
 }

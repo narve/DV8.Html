@@ -4,6 +4,10 @@ namespace DV8.Html.Elements;
 
 public class Pre : HtmlElement
 {
+    public Pre()
+    {
+    }
+
     public Pre(string s) : base(null, s)
     {
     }
