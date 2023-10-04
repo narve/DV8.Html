@@ -6,20 +6,21 @@ namespace DV8.Html.Framework;
 
 public interface IHtmlElement : IHtmlSerializable
 {
+    // ******** Global attributes ***/
     [Attr]
-    string Id { get; set; }
-
-    [Attr]
-    string Style { get; set; }
+    string? Id { get; set; }
 
     [Attr("class")]
-    string Clz { get; set; }
+    string? Clz { get; set; }
+    
+    string? Title { get; set; }
+    
+    [Attr]
+    string? Style { get; set; }
 
+
+    string? Tag { get; }
     List<IHtmlElement> Children { get; set; }
-
-    string Tag { get; }
-
-    string Title { get; set; }
 
     public string ToHtml();
     public string ToXml();

@@ -12,6 +12,7 @@ public class UnsafeTextContent : HtmlElement
 
     public UnsafeTextContent()
     {
+        Text = "";
     }
 
     public UnsafeTextContent(string text) => Text = text;

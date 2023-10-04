@@ -24,9 +24,11 @@ public class IgnoreTest
             MyIgnoredProperty = "Goodbye, World!",
         };
         var ser = HtmlSerializerRegistry.AddDefaults(new HtmlSerializerRegistry());
-        var serialized = string.Join("", ser.Serialize(obj, 3).Select(x => x.ToHtml()).ToArray())
+        var serialized = string.Join("", ser.Serialize(obj, 3).Select(x => x.ToHtml()))
             .Canonical();
 
+        
+        
         var exp = @"
 <dl itemscope='itemscope' itemtype='http://dv8.no/MyClass'>
 <dt>Type</dt><dd title='http://dv8.no/MyClass'>MyClass</dd>

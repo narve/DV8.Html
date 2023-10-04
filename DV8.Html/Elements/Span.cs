@@ -8,7 +8,7 @@ public class Span : HtmlElement
     {
     }
 
-    public Span(string s) : base(null, s)
+    public Span(string? text) : base(null, text)
     {
     }
 }

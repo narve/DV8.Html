@@ -9,21 +9,26 @@ public class BooleansToHtml
     public void BooleanAttributesShouldNotBeIncludedIfFalse()
     {
         // Arrange
-        var input = new Input {Disabled = false};
+        var input = new Input
+        {
+            Disabled = false,
+            Itemscope = false,
+            InputType = "text",
+            
+        };
 
         // Act
         var s = input.ToHtml();
 
         // Assert
         Assert.AreEqual("<input type='text'>", s.Canonical());
-        StringAssert.DoesNotContain( "disabled", s);
     }
 
     [Test]
     public void BooleanAttributesShouldUseAttributeNameAsValueNotBeIncludedIfTrue()
     {
         // Arrange
-        var input = new Input {Disabled = true};
+        var input = new Input {Disabled = true, InputType="text"};
 
         // Act
         var s = input.ToHtml();
@@ -36,7 +41,7 @@ public class BooleansToHtml
     public void Serializing_InputWithTrueBoolValues_ShouldWork()
     {
         // Arrange
-        Option input = new Option {Selected = true};
+        var input = new Option {Selected = true};
 
         // Act
         var s = input.ToHtml();

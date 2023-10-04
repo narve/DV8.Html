@@ -1,20 +1,20 @@
-﻿using DV8.Html.Framework;
+﻿using System.Collections.Generic;
+using DV8.Html.Framework;
+// ReSharper disable PropertyCanBeMadeInitOnly.Global
 
 namespace DV8.Html.Elements;
 
-public class Input : HtmlElement, IFormElement
+public class Input : InputElement, IFormElement
 {
     protected override bool AutoClose => false;
-    
-    [Attr]
-    public bool Disabled { get; set; }
 
     [Attr]
-    public string Name { get; set; }
+    public string? Pattern
+    {
+        get => Get("pattern");
+        set => Set("pattern", value);
+    }
 
-    [Attr]
-    public string Pattern { get; set; }
-        
     /// <summary>
     /// Seconds (for time at least)
     /// </summary>
@@ -22,22 +22,36 @@ public class Input : HtmlElement, IFormElement
     public int? Step { get; set; }
 
     [Attr]
-    public string PlaceHolder { get; set; }
+    public string? PlaceHolder
+    {
+        get => Get("placeholder");
+        set => Set("placeholder", value);
+    }
 
     [Attr("type")]
-    public object InputType { get; set; } = "text";
+    public string InputType
+    {
+        get => Get("type")!;
+        set => Set("type", string.IsNullOrEmpty(value) ? "text" : value);
+    }
 
-    [Attr]
-    public object Value { get; set; }
+    [Attr] public string? Value 
+    {
+        get => Get("value")!;
+        set => Set("value", string.IsNullOrEmpty(value) ? "text" : value);
+    }
 
-    [Attr]
-    public bool Checked { get; set; }
+    [Attr] public bool Checked
+    {
+        get => GetBool("checked");
+        set => SetBool("checked", value);
+    }        
 
-    [Attr]
-    public bool Readonly { get; set; }
-
-    [Attr]
-    public bool Required { get; set; }
+    [Attr] public bool Readonly
+    {
+        get => GetBool("readonly");
+        set => SetBool("readonly", value);
+    }        
 
 
     public Input Disable(bool d = true)
@@ -48,12 +62,27 @@ public class Input : HtmlElement, IFormElement
         return this;
     }
 
-    
-    public static Input ForString(string name, string value = null) => new Input
+    public Input()
+    {
+        // InputType = "text";
+    }
+
+    public Input(IEnumerable<IHtmlElement> htmlElements) : base(htmlElements)
+    {
+        // InputType = "text";
+    }
+
+    public Input(string? tagName = null, string? text = null) : base(tagName, text)
+    {
+        // InputType = "text";
+    }
+
+    public static Input ForString(string? name, string? value = null) => new()
     {
         Id = name,
         Name = name,
         PlaceHolder = name,
+        InputType = "text",
         Value = value,
     };
 }

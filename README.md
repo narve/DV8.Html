@@ -1,45 +1,44 @@
 DV8.Html
 ========
 
-C# package with a HTML DSL and support for generating HTML elements 
+C# package with a HTML DSL and support for generating HTML elements
 and serializing object graphs to HTML
 
-This project is a dead simple and dependency free package to work 
-with HTML elements from C# code. 
+This project is a dead simple and dependency free package to work
+with HTML elements from C# code.
 
-In addition, there is support for serializing objects and graphs of 
-objects to HTML. 
+In addition, there is support for serializing objects and graphs of
+objects to HTML.
 
-Lots of elements and attributes are implemented, and you can generate 
-missing elements/attributes at 
-run time by specifying element/attribute names.  
+Lots of elements and attributes are implemented, and you can generate
+missing elements/attributes at
+run time by specifying element/attribute names.
 
 Writing out non-standard / non-safe HTML code is also supported.
 
-Various helper methods are available to make it easy to work with 
+Various helper methods are available to make it easy to work with
 attributes and elements.
 
-See the test classes for more info. 
+See the test classes for more info.
 
 Requirements/Installation/Usage
 ------------------
 
-Requirements: .Net Core 6.0 or later. 
+Requirements: .Net Core 6.0 or later.
 
-Dependencies: None.  
+Dependencies: None.
 
-Usage: 
+Usage:
 
     dotnet add package DV8.Html
-
 
 Using the DSL-like syntax for generating HTML
 ----------------------------------------------------
 
-        using static DV8.Html.Prefixes.Underscore;
+       using static DV8.Html.Prefixes.Underscore;
         ...
        var fruits = new[] { "Apple", "Banana", "Cherry" };
-        var html =
+       var html =
             _<Html>(
                 _<Head>(
                     _<Title>("Hello, World!")
@@ -66,14 +65,13 @@ Using the DSL-like syntax for generating HTML
         // "Canonical" strips linebreaks, whitespace between elements, and uses ' instead of " as attribute delimiter.
         Assert.AreEqual(exp.Canonical(), act).Canonical();
 
-
 Generating XML / XHTML
 ----------------------
 
-Use ToXml instead of ToHtml if you want the output to be 
-correct XML. This uses the .Net XmlWriter class and is 
-probably safer and faster, however it will always close elements, 
-so an input becomes <input ... /> instead of <input ...>. 
+Use ToXml instead of ToHtml if you want the output to be
+correct XML. This uses the .Net XmlWriter class and is
+probably safer and faster, however it will always close elements,
+so an input becomes <input ... /> instead of <input ...>.
 In addition, it will use " instead of ' as attribute delimiter.
 
 
@@ -85,13 +83,14 @@ Example code for serializing objects to HTML (recursive to max 3 levels into pro
     var ser = HtmlSerializerRegistry.AddDefaults(new HtmlSerializerRegistry()); 
     var elements = HtmlSerializer.Serialize(myListOrCustomObjectOrWhatever, 3);
 
+This serializer can also be added as a HtmlOutputFormatter in Asp.Net, easily making all your JSON-APIs available
+as straight, human-readable HTML.
 
-This serializer can also be added as a HtmlOutputFormatter in Asp.Net, easily making all your JSON-APIs available 
-as straight, human-readable HTML. 
+Semantic HTML / microformats / S
 
 Contributing
 ------------
 
-In the very unlikely event that anybody actually is interested in this project: 
+In the very unlikely event that anybody actually is interested in this project:
 Let me know (starring it on github is enough) and I'll improve documentation and samples :)
 Issues and pull requests are also welcome.

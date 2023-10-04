@@ -15,7 +15,7 @@ namespace DV8.Html.Support;
 
 public static class HtmlSupport
 {
-    public static IHtmlElement Labelize(this IHtmlElement element, string label = null)
+    public static IHtmlElement Labelize(this IHtmlElement element, string? label = null)
     {
         return Label.Wrap(label ?? (element as IFormElement)?.Name, element);
     }

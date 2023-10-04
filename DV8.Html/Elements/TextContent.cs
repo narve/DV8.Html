@@ -9,10 +9,11 @@ public class TextContent : HtmlElement
     /// <summary>
     /// Gets or sets the text content to a new value that will be encoded when serializing.
     /// </summary>
-    public string Text { get; set; }
+    public string? Text { get; set; }
 
     public TextContent()
     {
+        Text = "";
     }
 
     public TextContent(string textThatWillBeEncoded) => Text = textThatWillBeEncoded;

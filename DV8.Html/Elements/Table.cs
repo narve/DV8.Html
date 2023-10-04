@@ -1,14 +1,12 @@
-﻿
-using DV8.Html.Framework;
+﻿using DV8.Html.Framework;
 
 namespace DV8.Html.Elements;
 
-public class Table: HtmlElement
+public class Table : HtmlElement
 {
-    public string Name { get; set; }
-
-    public override string ToString()
+    public string? Name
     {
-        return Name; 
+        get => Get("name");
+        set => Set("name", value);
     }
 }

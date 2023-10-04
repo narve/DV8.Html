@@ -7,15 +7,35 @@ namespace DV8.Html.Elements;
 public class Select : HtmlElement, IFormElement
 {
     [Attr]
-    public bool Multiple { get; set; } = false;
+    public bool Multiple 
+    {
+        get => GetBool("multiple");
+        set => SetBool("multiple", value);
+    }
 
-    public bool Disabled { get; set; }
+
+    public bool Disabled 
+    {
+        get => GetBool("disabled");
+        set => SetBool("disabled", value);
+    }
+        
 
     [Attr]
-    public string Name { get; set; }
+    public string? Name 
+    {
+        get => Get("name");
+        set => Set("name", value);
+    }
+        
 
     [Attr]
-    public object Size { get; set; }
+    public string? Size
+    {
+        get => Get("size");
+        set => Set("size", value);
+    }
+        
 
     // [Attr]
     // public object Value

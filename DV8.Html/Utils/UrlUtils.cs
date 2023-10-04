@@ -7,12 +7,15 @@ using static System.String;
 namespace DV8.Html.Utils;
 
 public static class UrlUtils {
-    public static string BuildQueryUrl(string baseRef, IEnumerable<KeyValuePair<string, string>> dict)
-        => dict.Any()
-            ? baseRef + "?" + Join("&", dict.Select(kvp => kvp.Key + "=" + EncodeUrlString(kvp.Value)).ToArray())
+    public static string? BuildQueryUrl(string? baseRef, IEnumerable<KeyValuePair<string, string>> dict)
+    {
+        var l = dict.ToList();
+        return l.Any()
+            ? baseRef + "?" + Join("&", l.Select(kvp => kvp.Key + "=" + EncodeUrlString(kvp.Value)).ToArray())
             : baseRef;
+    }
 
-    public static string EncodeUrlString(object val)
+    public static string EncodeUrlString(object? val)
     {
         if (val == null)
         {
@@ -25,7 +28,7 @@ public static class UrlUtils {
         }
         else
         {
-            return HttpUtility.UrlEncode(val.ToString());
+            return HttpUtility.UrlEncode(val.ToString())!;
         }
     }
 }

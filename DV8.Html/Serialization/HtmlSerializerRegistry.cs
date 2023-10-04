@@ -17,7 +17,7 @@ public class HtmlSerializerRegistry : IHtmlSerializer
     public bool CanSerialize(object o) => 
         Serializers.Any(ser => ser.CanSerialize(o));
 
-    public IEnumerable<IHtmlElement> Serialize(object o, int lvl, IHtmlSerializer fac = null)
+    public IEnumerable<IHtmlElement> Serialize(object o, int lvl, IHtmlSerializer? fac = null)
     {
         if( lvl < 0 )
             return Array.Empty<IHtmlElement>();
@@ -30,7 +30,7 @@ public class HtmlSerializerRegistry : IHtmlSerializer
 
     }
 
-    public IHtmlSerializer FindSerializer(object o) => Serializers.FirstOrDefault(ser => ser.CanSerialize(o));
+    public IHtmlSerializer? FindSerializer(object o) => Serializers.FirstOrDefault(ser => ser.CanSerialize(o));
 
 
     public HtmlSerializerRegistry Add(IHtmlSerializer ser)
@@ -65,7 +65,8 @@ public class HtmlSerializerRegistry : IHtmlSerializer
         string DateTimeToIso(DateTime d) => d.ToString("yyyy-MM-ddTHH:mm:ssK", InvariantCulture).Replace(" ", "T");
         string DateTimeOffsetToIso(DateTimeOffset d) => d.ToString("yyyy-MM-ddTHH:mm:ssK", InvariantCulture).Replace(" ", "T");
         
-        ser.Add(o => o == null, _ => Array.Empty<IHtmlElement>());
+        // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
+        ser.Add((o) => o == null, _ => Array.Empty<IHtmlElement>());
         ser.Add(o => o is IHtmlElement, o => ((IHtmlElement)o).ToArray());
         ser.Add(o => o is DateTimeOffset, o => new Time(DateTimeOffsetToIso((DateTimeOffset)o), DateTimeOffsetToIso((DateTimeOffset)o)).ToArray());
         ser.Add(o => o is DateTime, o => new Time(DateTimeToIso((DateTime)o), DateTimeToIso((DateTime)o)).ToArray());

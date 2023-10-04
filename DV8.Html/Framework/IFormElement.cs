@@ -6,7 +6,7 @@ public interface IFormElement: IHtmlElement
     bool Disabled { get; set; }
 
     [Attr]
-    string Name { get; set; }
+    string? Name { get; set; }
 
     // object Value { get; set; }
 

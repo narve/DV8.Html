@@ -20,11 +20,11 @@ public static class Withers
         => With(e, a => a.Name = name);
     
     public static Form WithMethod(this Form e, HttpMethod method)  
-        => With(e, a => a.Method = method);
+        => With(e, a => a.Method = method.ToString());
     
     public static A WithHref(this A t, string s) => With(t, a => a.Href = s);
-    public static A WithRel(this A t, string newRel) => With(t, a => a.rel = newRel);
-    public static A AddRel(this A t, string newRel) => WithRel(t, t.rel + " " + newRel);
+    public static A WithRel(this A t, string newRel) => With(t, a => a.Rel = newRel);
+    public static A AddRel(this A t, string newRel) => WithRel(t, t.Rel + " " + newRel);
 
     public static T WithId<T>(this T t, string newId) where T : IHtmlElement
         => With(t, a => a.Id = newId);

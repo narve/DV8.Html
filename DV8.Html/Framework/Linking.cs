@@ -9,20 +9,21 @@ namespace DV8.Html.Framework;
 public abstract class Linking : HtmlElement
 {
     [Attr]
-    public string rel { get; set; }
-
-    [Attr("data-disabled")]
-    public bool Disabled { get; set; }
-
+    public string? Rel
+    {
+        get => Get("rel");
+        set => Set("rel", value);
+    }
+        
     protected Linking()
     {
     }
 
-    protected Linking(string tagName = null, string txt = null) : base(tagName, txt)
+    protected Linking(string? tagName = null, string? txt = null) : base(tagName, txt)
     {
     }
 
-    public abstract A ToAnchor(string _href = null);
+    public abstract A ToAnchor(string? href = null);
     
     
 }

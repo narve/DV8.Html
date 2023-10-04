@@ -1,12 +1,16 @@
-﻿#nullable enable
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Xml;
 using DV8.Html.Elements;
 using DV8.Html.Serialization;
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable MemberCanBeProtected.Global
+// ReSharper disable UnusedMember.Global
 
 // ReSharper disable CollectionNeverUpdated.Global
 
@@ -14,27 +18,87 @@ using DV8.Html.Serialization;
 
 namespace DV8.Html.Framework;
 
+[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
 public class HtmlElement : IHtmlElement
 {
+    /// <summary>
+    /// Indicates whether this element is closable (like `div`) or not (like `input`)
+    /// </summary>
     protected virtual bool AutoClose => true;
-    
-    [Attr] public string? Id { get; set; }
 
-    [Attr] public string? Style { get; set; }
+    [Attr]
+    public string? Id
+    {
+        get => Get("id");
+        set => Set("id", value);
+    }
 
-    [Attr] public string? Title { get; set; }
+    [Attr] public string? Style
+    {
+        get => Get("style");
+        set => Set("style", value);
+    }
 
-    [Attr("class")] public string? Clz { get; set; }
+    [Attr] public string? Title
+    {
+        get => Get("title");
+        set => Set("title", value);
+    }
 
-    [Attr] public bool Itemscope { get; set; }
+    [Attr("class")] public string? Clz 
+    {
+        get => Get("class");
+        set => Set("class", value);
+    }
 
-    [Attr] public string? Itemtype { get; set; }
+    [Attr] public bool Itemscope 
+    {
+        get => GetBool("itemscope");
+        set => SetBool("itemscope", value);
+    }
 
-    [Attr] public string? Itemprop { get; set; }
+    [Attr] public string? Itemtype 
+    {
+        get => Get("itemtype");
+        set => Set("itemtype", value);
+    }
+
+    [Attr] public string? Itemprop 
+    {
+        get => Get("itemprop");
+        set => Set("itemprop", value);
+    }
+
+    protected string? Get(string attributeName) =>
+        Attributes.TryGetValue(attributeName, out var s)
+            ? s
+            : null;
+
+    public bool GetBool(string attributeName) =>
+        Get(attributeName) != null;
+
+    public void SetBool(string attributeName, bool value)
+    {
+        var key = attributeName.ToLower();
+        if (value)
+            Set(key, key);
+        else 
+            Attributes.Remove(key);
+    }
+
+    public void Set(string attributeName, string? value)
+    {
+        if (value == null)
+            Attributes.Remove(attributeName);
+        else
+            Attributes[attributeName] = value;
+    }
+
 
     public string Tag { get; }
 
-    public IDictionary<string, string> ExAttributes = new Dictionary<string, string>();
+    // ReSharper disable once FieldCanBeMadeReadOnly.Global
+    public IDictionary<string, string> Attributes = new Dictionary<string, string>();
 
     public IHtmlElement Add(params IHtmlElement[] children)
     {
@@ -52,12 +116,12 @@ public class HtmlElement : IHtmlElement
 
     public HtmlElement()
     {
-        Tag = GetTag();
+        Tag = GetDefaultTag();
     }
 
     public HtmlElement(IEnumerable<IHtmlElement> htmlElements)
     {
-        Tag = GetTag();
+        Tag = GetDefaultTag();
         Children.AddRange(htmlElements);
     }
 
@@ -68,7 +132,7 @@ public class HtmlElement : IHtmlElement
     /// <param name="text"></param>
     public HtmlElement(string? tagName = null, string? text = null)
     {
-        Tag = tagName ?? GetTag();
+        Tag = tagName ?? GetDefaultTag();
         AddIfNotEmpty(text);
     }
 
@@ -79,43 +143,45 @@ public class HtmlElement : IHtmlElement
         {
             var s = txt.ToString();
             if (!string.IsNullOrEmpty(s))
-                Children.Add(new TextContent(txt.ToString()));
+                Children.Add(new TextContent(s));
         }
     }
-    
-    public string GetTag()
-        => Tag?.ToLower() ?? GetType().Name.ToLower();
-    
+
+    public string GetDefaultTag()
+        => GetType().Name.ToLower();
+
     public IHtmlElement[] ToArray() => new IHtmlElement[] { this };
     public List<IHtmlElement> ToList() => new() { this };
 
     public virtual void WriteHtml(HtmlWriter writer)
     {
-        writer.WriteStartOfElement(GetTag());
+        writer.WriteStartOfElement(Tag);
         WriteAttributes(writer);
         writer.WriteEndOfElementTag();
-        foreach (var o in Children ?? new())
+        foreach (var o in Children)
         {
             o.WriteHtml(writer);
         }
+
         if (AutoClose)
-            writer.WriteEndElement(GetTag());
+            writer.WriteEndElement(Tag);
     }
-    
+
     public virtual void WriteXml(XmlWriter writer)
     {
-        writer.WriteStartElement(GetTag());
+        writer.WriteStartElement(Tag);
         WriteAttributes(writer);
-        foreach (var o in Children ?? new())
+        foreach (var o in Children)
         {
             o.WriteXml(writer);
         }
+
         writer.WriteEndElement();
     }
 
     private void WriteAttributes(HtmlWriter writer)
     {
-        foreach (var (key, value) in ExtractAttributes())
+        foreach (var (key, value) in ExtractAttributes().ToImmutableSortedDictionary())
             writer.WriteAttributeString(key, value);
     }
 
@@ -128,17 +194,17 @@ public class HtmlElement : IHtmlElement
     protected Dictionary<string, string> ExtractAttributes()
     {
         var dict = new Dictionary<string, string>();
-        foreach (var pi in DefinedAttributes().Where(AttributeHasValue))
-        {
-            var a = (Attr)pi.GetCustomAttribute(typeof(Attr))!;
-            var attrName = a.Name ?? pi.Name.ToLower();
-            var val = pi.PropertyType == typeof(bool) 
-                ? attrName 
-                : pi.GetValue(this)!;
-            dict.Add(attrName, val.ToString()!);
-        }
+        // foreach (var pi in DefinedAttributes().Where(AttributeHasValue))
+        // {
+        //     var a = (Attr)pi.GetCustomAttribute(typeof(Attr))!;
+        //     var attrName = a.Name ?? pi.Name.ToLower();
+        //     var val = pi.PropertyType == typeof(bool)
+        //         ? attrName
+        //         : pi.GetValue(this)!;
+        //     dict.Add(attrName, val.ToString()!);
+        // }
 
-        foreach (var (key, value) in ExAttributes ?? new Dictionary<string, string>())
+        foreach (var (key, value) in Attributes)
         {
             dict.Add(key, value);
         }
@@ -149,7 +215,7 @@ public class HtmlElement : IHtmlElement
     public bool AttributeHasValue(PropertyInfo pi)
     {
         var value = pi.GetValue(this);
-        return value != null && (pi.PropertyType != typeof(bool) || (bool)value!);
+        return value != null && (pi.PropertyType != typeof(bool) || (bool)value);
     }
 
     public IEnumerable<PropertyInfo> DefinedAttributes() =>
@@ -166,6 +232,7 @@ public class HtmlElement : IHtmlElement
         WriteHtml(htmlWriter);
         return writer.ToString();
     }
+
     public string ToXml()
     {
         using var writer = new StringWriter();

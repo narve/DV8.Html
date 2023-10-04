@@ -7,7 +7,12 @@ public class Label : HtmlElement
 {
 
     [Attr]
-    public string For { get; set; }
+    public string? For
+    {
+        get => Get("for");
+        set => Set("for", value);
+    }
+    
 
     public Label()
     {
@@ -29,7 +34,7 @@ public class Label : HtmlElement
             Children.AddRange(htmlElements);
     }
 
-    public static HtmlElement Wrap(string v, IHtmlElement elem) =>
+    public static HtmlElement Wrap(string? v, IHtmlElement elem) =>
         new Label
         {
             Children = new List<IHtmlElement> { new Span(v + ": "), elem },
