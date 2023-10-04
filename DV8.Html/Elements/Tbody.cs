@@ -1,6 +1,7 @@
-﻿namespace DV8.Html.Elements
+﻿using DV8.Html.Framework;
+
+namespace DV8.Html.Elements;
+
+public class Tbody : HtmlElement
 {
-    public class Tbody : HtmlElement
-    {
-    }
 }

@@ -1,45 +1,97 @@
+DV8.Html
+========
 
-https://github.com/narve/DV8.Html: HTML Elements and Html Serializer
+C# package with a HTML DSL and support for generating HTML elements 
+and serializing object graphs to HTML
 
-This project is a dead simple and dependency free package to work with HTML elements from C# code. 
+This project is a dead simple and dependency free package to work 
+with HTML elements from C# code. 
 
-In addition, there is support for serializing objects and graphs of objects to HTML. 
+In addition, there is support for serializing objects and graphs of 
+objects to HTML. 
 
-Lots of elements and attributes are implemented, and you can generate missing elements/attributes at 
+Lots of elements and attributes are implemented, and you can generate 
+missing elements/attributes at 
 run time by specifying element/attribute names.  
 
-Example code for generating HTML.  
+Writing out non-standard / non-safe HTML code is also supported.
 
-    var items = myList.Select( o => new P( o.GetSomeLineOfText()); 
+Various helper methods are available to make it easy to work with 
+attributes and elements.
 
-    var div = new Div
-            {
-                Clz = "results",
-                Subs = elements.ToArray(),
-            }; 
-            
-            
-    var html = div.ToHtml();
-    
-    
-Example code for serializing objects to HTML (recursing max 3 levels into properties)
+See the test classes for more info. 
 
-    var ser = HtmlSerializerRegistry.AddDefaults(new HtmlSerializerRegistry());
-    
+Requirements/Installation/Usage
+------------------
+
+Requirements: .Net Core 6.0 or later. 
+
+Dependencies: None.  
+
+Usage: 
+
+    dotnet add package DV8.Html
+
+
+Using the DSL-like syntax for generating HTML
+----------------------------------------------------
+
+        using static DV8.Html.Prefixes.Underscore;
+        ...
+       var fruits = new[] { "Apple", "Banana", "Cherry" };
+        var html =
+            _<Html>(
+                _<Head>(
+                    _<Title>("Hello, World!")
+                ),
+                _<Body>(
+                    _<H1>("Hello, World!"),
+                    _<P>(
+                        _("This is a paragraph with <>. "), // Becomes plain text, not an element. Text is escaped. 
+                        _<Ul>(
+                            fruits.Select(_<Li>)
+                        )
+                    ),
+                    _UNSAFE("This will not be <b>escaped</b>") // Allows any HTML, don't use this with untrusted content. 
+                )
+            );
+        var act = html.ToHtml();
+        var exp = @"
+        <!DOCTYPE html><html>
+        <head><title>Hello, World!</title></head>
+        <body><h1>Hello, World!</h1><p>This is a paragraph with &lt;&gt;. <ul><li>Apple</li><li>Banana</li><li>Cherry</li></ul></p>
+        This will not be <b>escaped</b>
+        </body></html>";
+
+        // "Canonical" strips linebreaks, whitespace between elements, and uses ' instead of " as attribute delimiter.
+        Assert.AreEqual(exp.Canonical(), act).Canonical();
+
+
+Generating XML / XHTML
+----------------------
+
+Use ToXml instead of ToHtml if you want the output to be 
+correct XML. This uses the .Net XmlWriter class and is 
+probably safer and faster, however it will always close elements, 
+so an input becomes <input ... /> instead of <input ...>. 
+In addition, it will use " instead of ' as attribute delimiter.
+
+
+Serialization
+-------------
+
+Example code for serializing objects to HTML (recursive to max 3 levels into properties)
+
+    var ser = HtmlSerializerRegistry.AddDefaults(new HtmlSerializerRegistry()); 
     var elements = HtmlSerializer.Serialize(myListOrCustomObjectOrWhatever, 3);
-    
-    var div = new Div
-                {
-                    Clz = "results",
-                    Subs = elements.ToArray(),
-                };
-                
-    var html = div.ToHtml();
 
 
 This serializer can also be added as a HtmlOutputFormatter in Asp.Net, easily making all your JSON-APIs available 
 as straight, human-readable HTML. 
 
+Contributing
+------------
 
 In the very unlikely event that anybody actually is interested in this project: 
-Let me know (starring it on github is enough) and I'll improve documentation and samples :) 
+Let me know (starring it on github is enough) and I'll improve documentation and samples :)
+Issues and pull requests are also welcome.

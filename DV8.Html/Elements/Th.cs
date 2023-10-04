@@ -1,14 +1,14 @@
-﻿namespace DV8.Html.Elements
-{
-    public class Th : HtmlElement
-    {
-        public Th()
-        {
-        }
+﻿using DV8.Html.Framework;
 
-        public Th(string r)
-        {
-            Text = r;
-        }
+namespace DV8.Html.Elements;
+
+public class Th : HtmlElement
+{
+    public Th()
+    {
+    }
+
+    public Th(string r) : base(null, r)
+    {
     }
 }

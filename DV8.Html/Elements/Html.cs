@@ -1,10 +1,25 @@
-﻿namespace DV8.Html.Elements
+﻿using System.Xml;
+using DV8.Html.Framework;
+
+namespace DV8.Html.Elements;
+
+public class Html : HtmlElement
 {
-    public class Html : HtmlElement
+    /// <summary>
+    /// Adds a standard html 5 doc type prelude. 
+    /// </summary>
+    public override void WriteXml(XmlWriter writer)
     {
-        public override string ToHtml()
-        {
-            return "<!DOCTYPE html>" + base.ToHtml();
-        }
+        writer.WriteRaw("<!DOCTYPE html>");
+        base.WriteXml(writer);
+    }
+
+    /// <summary>
+    /// Adds a standard html 5 doc type prelude. 
+    /// </summary>
+    public override void WriteHtml(HtmlWriter writer)
+    {
+        writer.WriteRaw("<!DOCTYPE html>");
+        base.WriteHtml(writer);
     }
 }

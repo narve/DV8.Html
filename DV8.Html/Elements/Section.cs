@@ -1,21 +1,18 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using DV8.Html.Framework;
 
-namespace DV8.Html.Elements
+namespace DV8.Html.Elements;
+
+public class Section : HtmlElement
 {
-    public class Section : HtmlElement
+    public Section()
     {
-        public Section()
-        {
-        }
+    }
 
-        public Section(IEnumerable<IHtmlElement> subs)
-        {
-            Subs = subs.ToArray();
-        }
-        public Section(params IHtmlElement[]subs)
-        {
-            Subs = subs.ToArray();
-        }
+    public Section(IEnumerable<IHtmlElement> subs) : base(subs)
+    {
+    }
+    public Section(params IHtmlElement[]subs): base(subs)
+    {
     }
 }

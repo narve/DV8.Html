@@ -1,21 +1,19 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using DV8.Html.Framework;
 
-namespace DV8.Html.Elements
+namespace DV8.Html.Elements;
+
+public class Div : HtmlElement
 {
-    public class Div : HtmlElement
+    public Div()
     {
-        public Div()
-        {
-        }
+    }
 
-        public Div(IEnumerable<IHtmlElement> subs)
-        {
-            Subs = subs.ToArray();
-        }
-        public Div(params IHtmlElement[]subs)
-        {
-            Subs = subs.ToArray();
-        }
+    public Div(IEnumerable<IHtmlElement> subs) : base(subs)
+    {
+    }
+
+    public Div(params IHtmlElement[]subs) : base(subs)
+    {
     }
 }

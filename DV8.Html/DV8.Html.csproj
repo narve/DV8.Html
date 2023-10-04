@@ -1,50 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <PackageDescription>C# package with a HTML DSL and support for generating HTML elements and serializing object graphs to HTML</PackageDescription>
         <RootNamespace>DV8.Html</RootNamespace>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>1.3</PackageVersion>
+        <PackageVersion>2.12</PackageVersion>
         <TargetFrameworks>net6.0;netcoreapp3.1</TargetFrameworks>
+        <LangVersion>10</LangVersion>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <RepositoryUrl>https://github.com/narve/DV8.Html</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageProjectUrl>https://github.com/narve/DV8.Html</PackageProjectUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
-
     <ItemGroup>
       <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     </ItemGroup>
-
-<!--    <ItemGroup>-->
-<!--      <_UnmanagedRegistrationCache Remove="obj\DV8.Html.csproj.UnmanagedRegistration.cache" />-->
-<!--    </ItemGroup>-->
-
-<!--    <ItemGroup>-->
-<!--      <_ResolveComReferenceCache Remove="obj\Debug\netcoreapp3.0\DV8.Html.csproj.ResolveComReference.cache" />-->
-<!--    </ItemGroup>-->
-
-<!--    <ItemGroup>-->
-<!--      <IntermediateAssembly Remove="obj\Debug\netcoreapp3.0\DV8.Html.dll" />-->
-<!--    </ItemGroup>-->
-
-<!--    <ItemGroup>-->
-<!--      <_DebugSymbolsIntermediatePath Remove="obj\Debug\netcoreapp3.0\DV8.Html.pdb" />-->
-<!--    </ItemGroup>-->
-
-<!--    <ItemGroup>-->
-<!--      <_DeploymentManifestEntryPoint Remove="obj\Debug\netcoreapp3.0\DV8.Html.dll" />-->
-<!--    </ItemGroup>-->
-
-<!--    <ItemGroup>-->
-<!--      <ApplicationManifest Remove="obj\Debug\netcoreapp3.0\Native.DV8.Html.manifest" />-->
-<!--    </ItemGroup>-->
-
-<!--    <ItemGroup>-->
-<!--      <DeployManifest Remove="obj\Debug\netcoreapp3.0\DV8.Html.application" />-->
-<!--    </ItemGroup>-->
-
-<!--    <ItemGroup>-->
-<!--      <ClsidMap Remove="obj\Debug\netcoreapp3.0\DV8.Html.clsidmap" />-->
-<!--    </ItemGroup>-->
-
-<!--    <ItemGroup>-->
-<!--      <RegFreeComManifest Remove="obj\Debug\netcoreapp3.0\DV8.Html.X.manifest" />-->
-<!--    </ItemGroup>-->
-
+    <ItemGroup>
+      <None Include="../README.md" Pack="true" PackagePath="/"/>
+    </ItemGroup>
 </Project>

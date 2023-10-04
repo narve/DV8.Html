@@ -1,15 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+    
     <PropertyGroup>
-
         <IsPackable>false</IsPackable>
-
         <LangVersion>default</LangVersion>
-
         <OutputType>Library</OutputType>
-
         <PackageVersion>1.0.7</PackageVersion>
-
         <TargetFramework>net6.0</TargetFramework>
     </PropertyGroup>
 
