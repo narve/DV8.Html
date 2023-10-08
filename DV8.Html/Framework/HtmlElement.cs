@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Xml;
 using DV8.Html.Elements;
 using DV8.Html.Serialization;
+
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable MemberCanBeProtected.Global
 // ReSharper disable UnusedMember.Global
@@ -22,48 +21,49 @@ namespace DV8.Html.Framework;
 public class HtmlElement : IHtmlElement
 {
     /// <summary>
-    /// Indicates whether this element is closable (like `div`) or not (like `input`)
+    /// Indicates whether this element is self-closing and should not have a closing element (like input, hr etc)
+    /// or whether it should have a closing element (like `div`)
     /// </summary>
-    protected virtual bool AutoClose => true;
+    protected virtual bool IsSelfClosing => false;
 
-    [Attr]
+
     public string? Id
     {
         get => Get("id");
         set => Set("id", value);
     }
 
-    [Attr] public string? Style
+    public string? Style
     {
         get => Get("style");
         set => Set("style", value);
     }
 
-    [Attr] public string? Title
+    public string? Title
     {
         get => Get("title");
         set => Set("title", value);
     }
 
-    [Attr("class")] public string? Clz 
+    public string? Class
     {
         get => Get("class");
         set => Set("class", value);
     }
 
-    [Attr] public bool Itemscope 
+    public bool Itemscope
     {
         get => GetBool("itemscope");
         set => SetBool("itemscope", value);
     }
 
-    [Attr] public string? Itemtype 
+    public string? Itemtype
     {
         get => Get("itemtype");
         set => Set("itemtype", value);
     }
 
-    [Attr] public string? Itemprop 
+    public string? Itemprop
     {
         get => Get("itemprop");
         set => Set("itemprop", value);
@@ -82,7 +82,7 @@ public class HtmlElement : IHtmlElement
         var key = attributeName.ToLower();
         if (value)
             Set(key, key);
-        else 
+        else
             Attributes.Remove(key);
     }
 
@@ -98,7 +98,10 @@ public class HtmlElement : IHtmlElement
     public string Tag { get; }
 
     // ReSharper disable once FieldCanBeMadeReadOnly.Global
-    public IDictionary<string, string> Attributes = new Dictionary<string, string>();
+    public IDictionary<string, string> Attributes { get; } = new Dictionary<string, string>();
+
+    // ReSharper disable once FieldCanBeMadeReadOnly.Global
+    public IDictionary<string, object> Properties { get; } = new Dictionary<string, object>();
 
     public IHtmlElement Add(params IHtmlElement[] children)
     {
@@ -163,7 +166,7 @@ public class HtmlElement : IHtmlElement
             o.WriteHtml(writer);
         }
 
-        if (AutoClose)
+        if (!IsSelfClosing)
             writer.WriteEndElement(Tag);
     }
 
@@ -219,7 +222,7 @@ public class HtmlElement : IHtmlElement
     }
 
     public IEnumerable<PropertyInfo> DefinedAttributes() =>
-        GetType().GetProperties().Where(pi => Attribute.IsDefined(pi, typeof(Attr)));
+        GetType().GetProperties();
 
     public override string ToString() => Tag;
 

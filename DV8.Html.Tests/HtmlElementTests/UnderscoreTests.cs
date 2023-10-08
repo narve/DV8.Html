@@ -1,6 +1,5 @@
 using System.Linq;
 using DV8.Html.Elements;
-using DV8.Html.Utils;
 using NUnit.Framework;
 using E = DV8.Html.Elements;
 using static DV8.Html.Prefixes.Underscore;

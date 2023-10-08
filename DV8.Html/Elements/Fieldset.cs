@@ -6,7 +6,7 @@ namespace DV8.Html.Elements;
 
 public class Fieldset : HtmlElement
 {
-    [Attr]
+    
     public string? Name 
     {
         get => Get("name");

@@ -46,7 +46,7 @@ public class ListSerializer : IHtmlSerializer
         var itemType = HtmlSupport.GetItemType(elementType);
         return new Ul
         {
-            Clz = "result-list " + itemType,
+            Class = "result-list " + itemType,
             Itemscope = true,
             Itemtype = HtmlSupport.Itemtype(o),
             Children = ((IEnumerable<object>) o)

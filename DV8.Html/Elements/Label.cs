@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using DV8.Html.Framework;
+// ReSharper disable MemberCanBePrivate.Global
 
 namespace DV8.Html.Elements;
 
 public class Label : HtmlElement
 {
 
-    [Attr]
+    
     public string? For
     {
         get => Get("for");
@@ -30,15 +31,14 @@ public class Label : HtmlElement
     {
         // We want to add the text first, not after the html elements
         AddIfNotEmpty(txt);
-        if(htmlElements != null)
-            Children.AddRange(htmlElements);
+        Children.AddRange(htmlElements);
     }
 
     public static HtmlElement Wrap(string? v, IHtmlElement elem) =>
         new Label
         {
             Children = new List<IHtmlElement> { new Span(v + ": "), elem },
-            Clz = "label-for-" + elem.Id,
+            Class = "label-for-" + elem.Id,
             For = elem.Id,
         };
 }

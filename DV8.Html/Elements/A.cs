@@ -5,7 +5,7 @@ namespace DV8.Html.Elements;
 
 public class A : Linking
 {
-    [Attr]
+    
     public string? Href 
     {
         get => Get("href");
@@ -27,7 +27,7 @@ public class A : Linking
     public A(string href, string? text = null, string? rel = null): base(null, text)
     {
         Href = href ?? throw new ArgumentNullException(nameof(href));
-        this.Rel = rel;
+        Rel = rel;
     }
 
 

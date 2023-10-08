@@ -6,9 +6,9 @@ namespace DV8.Html.Elements;
 
 public class Input : InputElement, IFormElement
 {
-    protected override bool AutoClose => false;
+    protected override bool IsSelfClosing => true;
 
-    [Attr]
+    
     public string? Pattern
     {
         get => Get("pattern");
@@ -18,36 +18,35 @@ public class Input : InputElement, IFormElement
     /// <summary>
     /// Seconds (for time at least)
     /// </summary>
-    [Attr]
+    
     public int? Step { get; set; }
 
-    [Attr]
+    
     public string? PlaceHolder
     {
         get => Get("placeholder");
         set => Set("placeholder", value);
     }
 
-    [Attr("type")]
-    public string InputType
+    public string Type
     {
         get => Get("type")!;
         set => Set("type", string.IsNullOrEmpty(value) ? "text" : value);
     }
 
-    [Attr] public string? Value 
+     public string? Value 
     {
         get => Get("value")!;
         set => Set("value", string.IsNullOrEmpty(value) ? "text" : value);
     }
 
-    [Attr] public bool Checked
+     public bool Checked
     {
         get => GetBool("checked");
         set => SetBool("checked", value);
     }        
 
-    [Attr] public bool Readonly
+     public bool Readonly
     {
         get => GetBool("readonly");
         set => SetBool("readonly", value);
@@ -57,7 +56,7 @@ public class Input : InputElement, IFormElement
     public Input Disable(bool d = true)
     {
         if (!d) return this;
-        Clz += " disabled";
+        Class += " disabled";
         Disabled = true;
         return this;
     }
@@ -82,7 +81,7 @@ public class Input : InputElement, IFormElement
         Id = name,
         Name = name,
         PlaceHolder = name,
-        InputType = "text",
+        Type = "text",
         Value = value,
     };
 }

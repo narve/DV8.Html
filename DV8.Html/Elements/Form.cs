@@ -13,7 +13,7 @@ public class Form : Linking//, ISelf
 {
     public string? BaseSelfUrl { get; set; }
 
-    [Attr]
+    
     public string? Action 
     {
         get => Get("action");
@@ -21,7 +21,7 @@ public class Form : Linking//, ISelf
     }
         
 
-    [Attr]
+    
     public string? Method
     {
         get => Get("method");
@@ -29,7 +29,7 @@ public class Form : Linking//, ISelf
     }
         
 
-    [Attr]
+    
     public string? Name
     {
         get => Get("name");
@@ -39,7 +39,7 @@ public class Form : Linking//, ISelf
 
     public static Input Submit(object? text = null) => new()
     {
-        InputType = "submit", 
+        Type = "submit", 
         Value = text?.ToString() ?? "Submit"
     };
 
@@ -76,13 +76,13 @@ public class Form : Linking//, ISelf
             .ForEach(i => dict[i.Name!.ToString()] = new[] {i.Value!.ToString()}.ToList());
         Children
             .OfTypeRecur<Select>()
-            .Where(i => !string.IsNullOrEmpty(i.Name.ToString()))
+            .Where(i => !string.IsNullOrEmpty(i.Name?.ToString()))
             .Select(s => new
             {
                 name = s.Name,
                 value = string.Join(",", s.Children.OfTypeRecur<Option>().Where(o => o.Selected).Select(o => o.Value).ToArray())
             })
-            .ForEach(i => dict[i.name.ToString()] = new[] {i.value.ToString()}.ToList());
+            .ForEach(i => dict[i.name!.ToString()] = new[] {i.value.ToString()}.ToList());
         // if (Disabled)
         //     dict[nameof(Disabled)] = new[] {"true"}.ToList();
         return dict;

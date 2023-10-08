@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DV8.Html.Framework;
+// ReSharper disable UnusedType.Global
 
 namespace DV8.Html.Elements;
 

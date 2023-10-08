@@ -6,30 +6,23 @@ namespace DV8.Html.Elements;
 
 public class Option : HtmlElement
 {
-    [Attr] public string? Value 
+     public string? Value 
     {
         get => Get("value");
         set => Set("value", value);
     }
         
-    [Attr] public bool Selected 
+     public bool Selected 
     {
         get => GetBool("selected");
         set => SetBool("selected", value);
     }        
 
-    [Attr] public bool Disabled
+     public bool Disabled
     {
         get => GetBool("disabled");
         set => SetBool("disabled", value);
     }        
-
-    [Attr] public string? Tooltip
-    {
-        get => Get("tooltip");
-        set => Set("tooltip", value);
-    }
-    
 
     public Option()
     {

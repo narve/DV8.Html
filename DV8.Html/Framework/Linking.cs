@@ -8,7 +8,7 @@ namespace DV8.Html.Framework;
 
 public abstract class Linking : HtmlElement
 {
-    [Attr]
+    
     public string? Rel
     {
         get => Get("rel");

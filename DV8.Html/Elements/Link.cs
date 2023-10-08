@@ -1,11 +1,12 @@
 ﻿using DV8.Html.Framework;
+// ReSharper disable UnusedType.Global
 
 namespace DV8.Html.Elements;
 
 public class Link : HtmlElement
 {
 
-    [Attr]
+    
     public string? Rel
     {
         get => Get("rel");
@@ -13,7 +14,7 @@ public class Link : HtmlElement
     }
 
 
-    [Attr]
+    
     public string? Href
     {
         get => Get("href");
@@ -21,7 +22,7 @@ public class Link : HtmlElement
     }
 
 
-    [Attr]
+    
     public string? Type
     {
         get => Get("type");
@@ -29,7 +30,7 @@ public class Link : HtmlElement
     }
 
 
-    [Attr]
+    
     public string? As
     {
         get => Get("as");
@@ -37,7 +38,7 @@ public class Link : HtmlElement
     }
 
 
-    [Attr]
+    
     public string? Sizes
     {
         get => Get("sizes");
@@ -45,7 +46,7 @@ public class Link : HtmlElement
     }
 
 
-    [Attr]
+    
     public string? Media
     {
         get => Get("media");
@@ -53,7 +54,7 @@ public class Link : HtmlElement
     }
 
 
-    [Attr]
+    
     public string? CrossOrigin
     {
         get => Get("crossorigin");

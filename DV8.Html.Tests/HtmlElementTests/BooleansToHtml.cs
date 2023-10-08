@@ -13,7 +13,7 @@ public class BooleansToHtml
         {
             Disabled = false,
             Itemscope = false,
-            InputType = "text",
+            Type = "text",
             
         };
 
@@ -28,7 +28,7 @@ public class BooleansToHtml
     public void BooleanAttributesShouldUseAttributeNameAsValueNotBeIncludedIfTrue()
     {
         // Arrange
-        var input = new Input {Disabled = true, InputType="text"};
+        var input = new Input {Disabled = true, Type="text"};
 
         // Act
         var s = input.ToHtml();

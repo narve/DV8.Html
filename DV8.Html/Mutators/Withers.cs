@@ -14,7 +14,7 @@ public static class Withers
     }
 
     public static T WithClz<T>(this T e, string clz) where T : IHtmlElement
-        => With(e, a => a.Clz = clz);
+        => With(e, a => a.Class = clz);
 
     public static T WithName<T>(this T e, string name) where T: IFormElement
         => With(e, a => a.Name = name);
@@ -33,5 +33,5 @@ public static class Withers
         => With(t, a => a.Title = x);
 
     public static T AddClz<T>(this T t, string clz) where T : IHtmlElement
-        => WithClz(t, t.Clz + " " + clz);
+        => WithClz(t, t.Class + " " + clz);
 }

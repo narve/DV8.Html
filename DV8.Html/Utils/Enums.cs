@@ -11,7 +11,7 @@ public static class Enums
         var values = (T[]) Enum.GetValues(t);
         if (values == null)
         {
-            throw new ArgumentException($"Ikke en enum-type: {t}");
+            throw new ArgumentException($"Not an enum-type: {t}");
         }
         if (values.All(v => v.ToString() != s))
         {

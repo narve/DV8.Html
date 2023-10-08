@@ -5,27 +5,27 @@ namespace DV8.Html.Elements;
 
 public class Style : HtmlElement
 {
-    [Attr] public string? Media 
+     public string? Media 
     {
         get => Get("media");
         set => Set("media", value);
     }
 
-    [Attr] public string? Nonce 
+     public string? Nonce 
     {
         get => Get("nonce");
         set => Set("nonce", value);
     }
 
-    [Attr] public string? Blocking 
+     public string? Blocking 
     {
         get => Get("blocking");
         set => Set("blocking", value);
     }
 
 
-    [Obsolete]
-    public string Type 
+    [Obsolete("https://developer.mozilla.org/en-US/docs/Web/HTML/Element/style")]
+    public string? Type 
     {
         get => Get("type");
         set => Set("type", value);
