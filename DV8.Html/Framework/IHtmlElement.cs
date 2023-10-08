@@ -29,7 +29,10 @@ public interface IHtmlElement : IHtmlSerializable
     // ReSharper disable once FieldCanBeMadeReadOnly.Global
     /// <summary>
     /// Element attributes. Included in HTML. Using this dictionary directly
-    /// bypasses validation of attribute names and values. 
+    /// bypasses validation of attribute names and values.
+    /// Setting value to null or empty string removes the attribute
+    /// from generated html. Note that boolean values are handled explicitly,
+    /// use SetBool for those.  
     /// </summary>
     public IDictionary<string, string> Attributes { get; }
 

@@ -1,5 +1,6 @@
 using DV8.Html.Framework;
 // ReSharper disable PropertyCanBeMadeInitOnly.Global
+// ReSharper disable MemberCanBePrivate.Global
 
 namespace DV8.Html.Elements;
 
