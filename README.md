@@ -21,6 +21,7 @@ attributes and elements.
 
 See the test classes for more info.
 
+
 Requirements/Installation/Usage
 ------------------
 
@@ -28,9 +29,12 @@ Requirements: .Net Core 6.0 or later.
 
 Dependencies: None.
 
+Nuget link: https://www.nuget.org/packages/DV8.Html/
+
 Usage:
 
     dotnet add package DV8.Html
+
 
 Using the DSL-like syntax for generating HTML
 ----------------------------------------------------
@@ -65,14 +69,30 @@ Using the DSL-like syntax for generating HTML
         // "Canonical" strips linebreaks, whitespace between elements, and uses ' instead of " as attribute delimiter.
         Assert.AreEqual(exp.Canonical(), act).Canonical();
 
+
+Using plain C#
+--------------
+
+
+    var fruits = new[] { "Apple", "Banana", "Cherry" }
+        .Select( f => new A( $"https://fruits.org/{f}));
+    var ul = new Ul(fruits)
+        .WithClass("the-fruits");
+    ul.Attributes["my-attribute"] = "my-value";
+    ul.Properties["my-property"] = myFruitCollectionObject;
+    var p = new P("This is a paragraph with <>. ", ul);
+
+    var ulHtml = ul.ToHtml()
+
+
 Generating XML / XHTML
 ----------------------
 
 Use ToXml instead of ToHtml if you want the output to be
 correct XML. This uses the .Net XmlWriter class and is
 probably safer and faster, however it will always close elements,
-so an input becomes <input ... /> instead of <input ...>.
-In addition, it will use " instead of ' as attribute delimiter.
+so an input becomes `<input ... />` instead of `<input ...>`.
+In addition, it will use `"` instead of `'` as attribute delimiter.
 
 
 Serialization
@@ -86,7 +106,12 @@ Example code for serializing objects to HTML (recursive to max 3 levels into pro
 This serializer can also be added as a HtmlOutputFormatter in Asp.Net, easily making all your JSON-APIs available
 as straight, human-readable HTML.
 
+
 Semantic HTML / microformats / S
+---------------------------------
+
+Documentation TBA :) 
+
 
 Contributing
 ------------
