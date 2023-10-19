@@ -122,9 +122,27 @@ public class HtmlElement : IHtmlElement
         Tag = GetDefaultTag();
     }
 
-    public HtmlElement(IEnumerable<IHtmlElement> htmlElements)
+    protected HtmlElement(IEnumerable<IHtmlElement> htmlElements)
     {
         Tag = GetDefaultTag();
+        Children.AddRange(htmlElements);
+    }
+
+    protected HtmlElement(params IHtmlElement[] htmlElements)
+    {
+        Tag = GetDefaultTag();
+        Children.AddRange(htmlElements);
+    }
+
+    public HtmlElement(string tag, params IHtmlElement[] htmlElements)
+    {
+        Tag = tag;
+        Children.AddRange(htmlElements);
+    }
+
+    public HtmlElement(string tag, IEnumerable<IHtmlElement> htmlElements)
+    {
+        Tag = tag;
         Children.AddRange(htmlElements);
     }
 
