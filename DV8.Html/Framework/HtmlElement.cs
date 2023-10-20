@@ -77,6 +77,12 @@ public class HtmlElement : IHtmlElement
     public bool GetBool(string attributeName) =>
         Get(attributeName) != null;
 
+    public int? GetInt(string attributeName)
+    {
+        var ok = int.TryParse(Get(attributeName), out var i);
+        return ok ? i : null;
+    }
+
     public void SetBool(string attributeName, bool value)
     {
         var key = attributeName.ToLower();

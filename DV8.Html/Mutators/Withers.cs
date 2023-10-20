@@ -30,6 +30,12 @@ public static class Withers
     public static A WithRel(this A t, string newRel) => With(t, a => a.Rel = newRel);
     public static A AddRel(this A t, string newRel) => WithRel(t, t.Rel + " " + newRel);
 
+    public static Td WithColspan(this Td t, int colspan)
+        => With(t, element => element.Colspan = colspan);
+
+    public static Th WithColspan(this Th t, int colspan)
+        => With(t, element => element.Colspan = colspan);
+
     public static T WithId<T>(this T t, string newId) where T : IHtmlElement
         => With(t, a => a.Id = newId);
 

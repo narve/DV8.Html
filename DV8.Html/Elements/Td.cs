@@ -4,6 +4,12 @@ namespace DV8.Html.Elements;
 
 public class Td : HtmlElement
 {
+    public int? Colspan
+    {
+        get => GetInt("colspan");
+        set => Set("colspan", value?.ToString());
+    }    
+    
     public Td()
     {
     }
