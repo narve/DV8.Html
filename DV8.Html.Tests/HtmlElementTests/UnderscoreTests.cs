@@ -31,8 +31,13 @@ public class UnderscoreTests
         
         var exp = @"
 <!DOCTYPE html><html>
-<head><title>Hello, World!</title></head>
-<body><h1>Hello, World!</h1><p>This is a paragraph with &lt;&gt;. <ul><li>Apple</li><li>Banana</li><li>Cherry</li></ul></p>
+<head>
+    <title>Hello, World!</title>
+</head>
+<body>
+<h1>Hello, World!</h1>
+<p>This is a paragraph with &lt;&gt;. 
+<ul><li>Apple</li><li>Banana</li><li>Cherry</li></ul></p>
 This will <em>not</em> be escaped
 </body></html>";
         

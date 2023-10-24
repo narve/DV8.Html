@@ -27,6 +27,12 @@ public class HtmlElement : IHtmlElement
     /// </summary>
     protected virtual bool IsSelfClosing => false;
 
+    /// <summary>
+    /// Hints whether this is mostly a text-container (like span, p, h1) or a block (like div).
+    /// Blocks elements will use prefix to enable pretty printing. 
+    /// </summary>
+    protected virtual bool IsInlineBlock => false;
+    
 
     public string? Id
     {
@@ -183,11 +189,20 @@ public class HtmlElement : IHtmlElement
 
     public virtual void WriteHtml(HtmlWriter writer, string prefix = "")
     {
-        // writer.WriteRaw(prefix);
+        // Assume we start at beginning of line
+        // if (!IsInlineBlock)
+        {
+            writer.WriteRaw(prefix);
+        }
         writer.WriteStartOfElement(Tag);
         WriteAttributes(writer);
         writer.WriteEndOfElementTag();
 
+        if (!IsInlineBlock)
+        {
+            writer.WriteRaw("\r\n");
+        }
+        
         // bool hasTextContent = Children.Any(s => s is TextContent or UnsafeTextContent);
         // if(!hasTextContent)
         //     writer.WriteRaw("\r\n");
@@ -198,6 +213,10 @@ public class HtmlElement : IHtmlElement
 
         if (!IsSelfClosing)
         {
+            if (!IsInlineBlock)
+            {
+                writer.WriteRaw("\r\n");
+            }
             // writer.WriteRaw(prefix);
             writer.WriteEndElement(Tag);
         }

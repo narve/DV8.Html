@@ -4,6 +4,7 @@ namespace DV8.Html.Elements;
 
 public class Em: HtmlElement
 {
+    protected override bool IsInlineBlock => true;
     public Em()
     {
     }

@@ -13,8 +13,8 @@ public static class Helpers
         s = Regex.Replace(s, attrPattern, "='$1'");
  
         // Replace indents: 
-        var indentPattern = ">(\\s+)<";
-        s = Regex.Replace(s, indentPattern, "><");
+        var indentPattern = new Regex(@"(\s+)<");
+        s = indentPattern.Replace(s, "<");
         
         // Replace spaces before end-of-element: 
         var endPattern = @" +\/\>";

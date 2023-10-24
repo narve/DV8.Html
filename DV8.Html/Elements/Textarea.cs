@@ -6,5 +6,6 @@ namespace DV8.Html.Elements;
 
 public class Textarea : InputElement, IFormElement
 {
+    protected override bool IsInlineBlock => true;
 
 }
