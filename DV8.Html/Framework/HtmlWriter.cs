@@ -9,15 +9,9 @@ public class HtmlWriter : IDisposable
 
     public HtmlWriter(TextWriter writer) => _writer = writer;
 
-    public void WriteStartOfElement(string tag)
-    {
-        _writer.Write('<' + tag);
-    }
+    public void WriteStartOfElement(string tag) => _writer.Write('<' + tag);
 
-    public void WriteEndOfElementTag()
-    {
-        _writer.Write('>');
-    }
+    public void WriteEndOfElementTag() => _writer.Write('>');
 
     public void WriteAttributeString(string key, string value)
     {
@@ -33,8 +27,5 @@ public class HtmlWriter : IDisposable
     {
     }
 
-    public void WriteRaw(string text)
-    {
-        _writer.Write(text);
-    }
+    public void WriteRaw(string text) => _writer.Write(text);
 }

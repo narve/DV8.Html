@@ -17,9 +17,9 @@ public class Html : HtmlElement
     /// <summary>
     /// Adds a standard html 5 doc type prelude. 
     /// </summary>
-    public override void WriteHtml(HtmlWriter writer)
+    public override void WriteHtml(HtmlWriter writer, string prefix = "")
     {
         writer.WriteRaw("<!DOCTYPE html>");
-        base.WriteHtml(writer);
+        base.WriteHtml(writer, prefix);
     }
 }

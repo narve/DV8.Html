@@ -2,6 +2,7 @@
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Xml;
 using DV8.Html.Elements;
@@ -180,18 +181,29 @@ public class HtmlElement : IHtmlElement
     public IHtmlElement[] ToArray() => new IHtmlElement[] { this };
     public List<IHtmlElement> ToList() => new() { this };
 
-    public virtual void WriteHtml(HtmlWriter writer)
+    public virtual void WriteHtml(HtmlWriter writer, string prefix = "")
     {
+        // writer.WriteRaw(prefix);
         writer.WriteStartOfElement(Tag);
         WriteAttributes(writer);
         writer.WriteEndOfElementTag();
+
+        // bool hasTextContent = Children.Any(s => s is TextContent or UnsafeTextContent);
+        // if(!hasTextContent)
+        //     writer.WriteRaw("\r\n");
         foreach (var o in Children)
         {
-            o.WriteHtml(writer);
+            o.WriteHtml(writer, prefix + "  ");
         }
 
         if (!IsSelfClosing)
+        {
+            // writer.WriteRaw(prefix);
             writer.WriteEndElement(Tag);
+        }
+        
+        // if(!hasTextContent)
+        //     writer.WriteRaw("\r\n");
     }
 
     public virtual void WriteXml(XmlWriter writer)

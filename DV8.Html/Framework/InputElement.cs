@@ -13,8 +13,8 @@ public abstract class InputElement: HtmlElement
     
     public string? Name
     {
-        get => Get("id");
-        set => Set("id", value);
+        get => Get("name");
+        set => Set("name", value);
     }
     
      public bool Required

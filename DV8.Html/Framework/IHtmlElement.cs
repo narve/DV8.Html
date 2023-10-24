@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml;
 using DV8.Html.Serialization;
+
 // ReSharper disable UnusedMemberInSuper.Global
 // ReSharper disable PropertyCanBeMadeInitOnly.Global
 
@@ -9,19 +10,19 @@ namespace DV8.Html.Framework;
 public interface IHtmlElement : IHtmlSerializable
 {
     // ******** Global attributes ***/
-    
+
     string? Id { get; set; }
 
     string? Class { get; set; }
-    
+
     string? Title { get; set; }
-    
+
     string? Style { get; set; }
 
     string? Tag { get; }
-    
+
     List<IHtmlElement> Children { get; set; }
-    
+
 
     public string ToHtml();
     public string ToXml();
@@ -56,7 +57,7 @@ public interface IHtmlElement : IHtmlSerializable
         Children.AddRange(children);
         return this;
     }
-    
+
     void WriteXml(XmlWriter writer);
-    void WriteHtml(HtmlWriter writer);
+    void WriteHtml(HtmlWriter writer, string prefix = "");
 }

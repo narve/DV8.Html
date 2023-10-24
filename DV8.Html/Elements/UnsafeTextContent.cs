@@ -18,5 +18,5 @@ public class UnsafeTextContent : HtmlElement
     public UnsafeTextContent(string text) => Text = text;
 
     public override void WriteXml(XmlWriter writer) => writer.WriteRaw(Text);
-    public override void WriteHtml(HtmlWriter writer) => writer.WriteRaw(Text);
+    public override void WriteHtml(HtmlWriter writer, string prefix = "") => writer.WriteRaw(Text);
 }

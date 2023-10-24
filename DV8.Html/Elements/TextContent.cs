@@ -19,5 +19,5 @@ public class TextContent : HtmlElement
     public TextContent(string textThatWillBeEncoded) => Text = textThatWillBeEncoded;
 
     public override void WriteXml(XmlWriter writer) => writer.WriteString(Text);
-    public override void WriteHtml(HtmlWriter writer) => writer.WriteRaw(WebUtility.HtmlEncode(Text));
+    public override void WriteHtml(HtmlWriter writer, string prefix = "") => writer.WriteRaw(WebUtility.HtmlEncode(Text));
 }
