@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <PackageVersion>2.19</PackageVersion>
+        <PackageVersion>2.3</PackageVersion>
         <PackageDescription>C# package with a HTML DSL and support for generating HTML elements and serializing object graphs to HTML</PackageDescription>
         <RootNamespace>DV8.Html</RootNamespace>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DV8.Html", "..\DV8.Html\DV8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DV8.Html.Tests", "..\DV8.Html\DV8.Html.Tests\DV8.Html.Tests.csproj", "{F1FA6B82-4C46-4B27-81AF-5AC176F0542C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcOutputFormatter", "MvcOutputFormatter\MvcOutputFormatter.csproj", "{772E6853-853C-4785-A0B0-E9FE1E4724CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{F1FA6B82-4C46-4B27-81AF-5AC176F0542C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1FA6B82-4C46-4B27-81AF-5AC176F0542C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1FA6B82-4C46-4B27-81AF-5AC176F0542C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{772E6853-853C-4785-A0B0-E9FE1E4724CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{772E6853-853C-4785-A0B0-E9FE1E4724CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{772E6853-853C-4785-A0B0-E9FE1E4724CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{772E6853-853C-4785-A0B0-E9FE1E4724CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

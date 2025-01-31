@@ -1,12 +1,20 @@
 ﻿using DV8.Html.Framework;
+
 // ReSharper disable UnusedType.Global
 
 namespace DV8.Html.Elements;
 
 public class Link : HtmlElement
 {
+    public static Link StylesheetLink(string href, string? media = null, string? crossOrigin = null) =>
+        new()
+        {
+            Rel = "stylesheet",
+            Href = href,
+            Media = media,
+            CrossOrigin = crossOrigin
+        };
 
-    
     public string? Rel
     {
         get => Get("rel");
@@ -14,7 +22,6 @@ public class Link : HtmlElement
     }
 
 
-    
     public string? Href
     {
         get => Get("href");
@@ -22,7 +29,6 @@ public class Link : HtmlElement
     }
 
 
-    
     public string? Type
     {
         get => Get("type");
@@ -30,7 +36,6 @@ public class Link : HtmlElement
     }
 
 
-    
     public string? As
     {
         get => Get("as");
@@ -38,7 +43,6 @@ public class Link : HtmlElement
     }
 
 
-    
     public string? Sizes
     {
         get => Get("sizes");
@@ -46,7 +50,6 @@ public class Link : HtmlElement
     }
 
 
-    
     public string? Media
     {
         get => Get("media");
@@ -54,7 +57,6 @@ public class Link : HtmlElement
     }
 
 
-    
     public string? CrossOrigin
     {
         get => Get("crossorigin");
