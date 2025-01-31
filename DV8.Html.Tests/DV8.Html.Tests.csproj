@@ -6,6 +6,7 @@
         <OutputType>Library</OutputType>
         <PackageVersion>1.0.7</PackageVersion>
         <TargetFramework>net6.0</TargetFramework>
+        <Nullable>annotations</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
