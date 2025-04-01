@@ -5,7 +5,7 @@
         <PackageDescription>C# package with a HTML DSL and support for generating HTML elements and serializing object graphs to HTML</PackageDescription>
         <RootNamespace>DV8.Html</RootNamespace>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <TargetFrameworks>net6.0;netcoreapp3.1</TargetFrameworks>
+        <TargetFrameworks>net8.0;net6.0</TargetFrameworks>
         <LangVersion>10</LangVersion>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <RepositoryUrl>https://github.com/narve/DV8.Html</RepositoryUrl>
